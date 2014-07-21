@@ -7,9 +7,16 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "DPRPrinter.h"
+#import "DPRStatus.h"
+#import "DPRSite.h"
 
 @interface DPRDataModel : NSObject
 
 +(DPRDataModel*)sharedInstance;
+
+//get an array of all the printers
+-(void)populatePrinterListWithCompletion:(void(^)(NSArray *list, NSError *error))completion;
+
 
 @end
