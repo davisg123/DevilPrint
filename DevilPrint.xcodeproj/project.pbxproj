@@ -1,0 +1,486 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		72B1D7DE197CB87200C9896B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72B1D7DD197CB87200C9896B /* Foundation.framework */; };
+		72B1D7E0197CB87200C9896B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72B1D7DF197CB87200C9896B /* CoreGraphics.framework */; };
+		72B1D7E2197CB87200C9896B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72B1D7E1197CB87200C9896B /* UIKit.framework */; };
+		72B1D7E8197CB87200C9896B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 72B1D7E6197CB87200C9896B /* InfoPlist.strings */; };
+		72B1D7EA197CB87200C9896B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 72B1D7E9197CB87200C9896B /* main.m */; };
+		72B1D7EE197CB87200C9896B /* DPRAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 72B1D7ED197CB87200C9896B /* DPRAppDelegate.m */; };
+		72B1D7F1197CB87200C9896B /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 72B1D7EF197CB87200C9896B /* Main_iPhone.storyboard */; };
+		72B1D7F4197CB87200C9896B /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 72B1D7F2197CB87200C9896B /* Main_iPad.storyboard */; };
+		72B1D7F7197CB87200C9896B /* DPRViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72B1D7F6197CB87200C9896B /* DPRViewController.m */; };
+		72B1D7F9197CB87200C9896B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 72B1D7F8197CB87200C9896B /* Images.xcassets */; };
+		72B1D800197CB87200C9896B /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72B1D7FF197CB87200C9896B /* XCTest.framework */; };
+		72B1D801197CB87200C9896B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72B1D7DD197CB87200C9896B /* Foundation.framework */; };
+		72B1D802197CB87200C9896B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72B1D7E1197CB87200C9896B /* UIKit.framework */; };
+		72B1D80A197CB87200C9896B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 72B1D808197CB87200C9896B /* InfoPlist.strings */; };
+		72B1D80C197CB87200C9896B /* DevilPrintTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 72B1D80B197CB87200C9896B /* DevilPrintTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		72B1D803197CB87200C9896B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 72B1D7D2197CB87200C9896B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 72B1D7D9197CB87200C9896B;
+			remoteInfo = DevilPrint;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		72B1D7DA197CB87200C9896B /* DevilPrint.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DevilPrint.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		72B1D7DD197CB87200C9896B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		72B1D7DF197CB87200C9896B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		72B1D7E1197CB87200C9896B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		72B1D7E5197CB87200C9896B /* DevilPrint-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DevilPrint-Info.plist"; sourceTree = "<group>"; };
+		72B1D7E7197CB87200C9896B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		72B1D7E9197CB87200C9896B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		72B1D7EB197CB87200C9896B /* DevilPrint-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DevilPrint-Prefix.pch"; sourceTree = "<group>"; };
+		72B1D7EC197CB87200C9896B /* DPRAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DPRAppDelegate.h; sourceTree = "<group>"; };
+		72B1D7ED197CB87200C9896B /* DPRAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DPRAppDelegate.m; sourceTree = "<group>"; };
+		72B1D7F0197CB87200C9896B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
+		72B1D7F3197CB87200C9896B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
+		72B1D7F5197CB87200C9896B /* DPRViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DPRViewController.h; sourceTree = "<group>"; };
+		72B1D7F6197CB87200C9896B /* DPRViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DPRViewController.m; sourceTree = "<group>"; };
+		72B1D7F8197CB87200C9896B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		72B1D7FE197CB87200C9896B /* DevilPrintTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DevilPrintTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		72B1D7FF197CB87200C9896B /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		72B1D807197CB87200C9896B /* DevilPrintTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DevilPrintTests-Info.plist"; sourceTree = "<group>"; };
+		72B1D809197CB87200C9896B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		72B1D80B197CB87200C9896B /* DevilPrintTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DevilPrintTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		72B1D7D7197CB87200C9896B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				72B1D7E0197CB87200C9896B /* CoreGraphics.framework in Frameworks */,
+				72B1D7E2197CB87200C9896B /* UIKit.framework in Frameworks */,
+				72B1D7DE197CB87200C9896B /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		72B1D7FB197CB87200C9896B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				72B1D800197CB87200C9896B /* XCTest.framework in Frameworks */,
+				72B1D802197CB87200C9896B /* UIKit.framework in Frameworks */,
+				72B1D801197CB87200C9896B /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		72B1D7D1197CB87200C9896B = {
+			isa = PBXGroup;
+			children = (
+				72B1D7E3197CB87200C9896B /* DevilPrint */,
+				72B1D805197CB87200C9896B /* DevilPrintTests */,
+				72B1D7DC197CB87200C9896B /* Frameworks */,
+				72B1D7DB197CB87200C9896B /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		72B1D7DB197CB87200C9896B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				72B1D7DA197CB87200C9896B /* DevilPrint.app */,
+				72B1D7FE197CB87200C9896B /* DevilPrintTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		72B1D7DC197CB87200C9896B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				72B1D7DD197CB87200C9896B /* Foundation.framework */,
+				72B1D7DF197CB87200C9896B /* CoreGraphics.framework */,
+				72B1D7E1197CB87200C9896B /* UIKit.framework */,
+				72B1D7FF197CB87200C9896B /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		72B1D7E3197CB87200C9896B /* DevilPrint */ = {
+			isa = PBXGroup;
+			children = (
+				72B1D7EC197CB87200C9896B /* DPRAppDelegate.h */,
+				72B1D7ED197CB87200C9896B /* DPRAppDelegate.m */,
+				72B1D7EF197CB87200C9896B /* Main_iPhone.storyboard */,
+				72B1D7F2197CB87200C9896B /* Main_iPad.storyboard */,
+				72B1D7F5197CB87200C9896B /* DPRViewController.h */,
+				72B1D7F6197CB87200C9896B /* DPRViewController.m */,
+				72B1D7F8197CB87200C9896B /* Images.xcassets */,
+				72B1D7E4197CB87200C9896B /* Supporting Files */,
+			);
+			path = DevilPrint;
+			sourceTree = "<group>";
+		};
+		72B1D7E4197CB87200C9896B /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				72B1D7E5197CB87200C9896B /* DevilPrint-Info.plist */,
+				72B1D7E6197CB87200C9896B /* InfoPlist.strings */,
+				72B1D7E9197CB87200C9896B /* main.m */,
+				72B1D7EB197CB87200C9896B /* DevilPrint-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		72B1D805197CB87200C9896B /* DevilPrintTests */ = {
+			isa = PBXGroup;
+			children = (
+				72B1D80B197CB87200C9896B /* DevilPrintTests.m */,
+				72B1D806197CB87200C9896B /* Supporting Files */,
+			);
+			path = DevilPrintTests;
+			sourceTree = "<group>";
+		};
+		72B1D806197CB87200C9896B /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				72B1D807197CB87200C9896B /* DevilPrintTests-Info.plist */,
+				72B1D808197CB87200C9896B /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		72B1D7D9197CB87200C9896B /* DevilPrint */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 72B1D80F197CB87200C9896B /* Build configuration list for PBXNativeTarget "DevilPrint" */;
+			buildPhases = (
+				72B1D7D6197CB87200C9896B /* Sources */,
+				72B1D7D7197CB87200C9896B /* Frameworks */,
+				72B1D7D8197CB87200C9896B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DevilPrint;
+			productName = DevilPrint;
+			productReference = 72B1D7DA197CB87200C9896B /* DevilPrint.app */;
+			productType = "com.apple.product-type.application";
+		};
+		72B1D7FD197CB87200C9896B /* DevilPrintTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 72B1D812197CB87200C9896B /* Build configuration list for PBXNativeTarget "DevilPrintTests" */;
+			buildPhases = (
+				72B1D7FA197CB87200C9896B /* Sources */,
+				72B1D7FB197CB87200C9896B /* Frameworks */,
+				72B1D7FC197CB87200C9896B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				72B1D804197CB87200C9896B /* PBXTargetDependency */,
+			);
+			name = DevilPrintTests;
+			productName = DevilPrintTests;
+			productReference = 72B1D7FE197CB87200C9896B /* DevilPrintTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		72B1D7D2197CB87200C9896B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = DPR;
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = "Davis Gossage";
+				TargetAttributes = {
+					72B1D7FD197CB87200C9896B = {
+						TestTargetID = 72B1D7D9197CB87200C9896B;
+					};
+				};
+			};
+			buildConfigurationList = 72B1D7D5197CB87200C9896B /* Build configuration list for PBXProject "DevilPrint" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 72B1D7D1197CB87200C9896B;
+			productRefGroup = 72B1D7DB197CB87200C9896B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				72B1D7D9197CB87200C9896B /* DevilPrint */,
+				72B1D7FD197CB87200C9896B /* DevilPrintTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		72B1D7D8197CB87200C9896B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				72B1D7F4197CB87200C9896B /* Main_iPad.storyboard in Resources */,
+				72B1D7F9197CB87200C9896B /* Images.xcassets in Resources */,
+				72B1D7F1197CB87200C9896B /* Main_iPhone.storyboard in Resources */,
+				72B1D7E8197CB87200C9896B /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		72B1D7FC197CB87200C9896B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				72B1D80A197CB87200C9896B /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		72B1D7D6197CB87200C9896B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				72B1D7EA197CB87200C9896B /* main.m in Sources */,
+				72B1D7EE197CB87200C9896B /* DPRAppDelegate.m in Sources */,
+				72B1D7F7197CB87200C9896B /* DPRViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		72B1D7FA197CB87200C9896B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				72B1D80C197CB87200C9896B /* DevilPrintTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		72B1D804197CB87200C9896B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 72B1D7D9197CB87200C9896B /* DevilPrint */;
+			targetProxy = 72B1D803197CB87200C9896B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		72B1D7E6197CB87200C9896B /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				72B1D7E7197CB87200C9896B /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		72B1D7EF197CB87200C9896B /* Main_iPhone.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				72B1D7F0197CB87200C9896B /* Base */,
+			);
+			name = Main_iPhone.storyboard;
+			sourceTree = "<group>";
+		};
+		72B1D7F2197CB87200C9896B /* Main_iPad.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				72B1D7F3197CB87200C9896B /* Base */,
+			);
+			name = Main_iPad.storyboard;
+			sourceTree = "<group>";
+		};
+		72B1D808197CB87200C9896B /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				72B1D809197CB87200C9896B /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		72B1D80D197CB87200C9896B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		72B1D80E197CB87200C9896B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		72B1D810197CB87200C9896B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "DevilPrint/DevilPrint-Prefix.pch";
+				INFOPLIST_FILE = "DevilPrint/DevilPrint-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		72B1D811197CB87200C9896B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "DevilPrint/DevilPrint-Prefix.pch";
+				INFOPLIST_FILE = "DevilPrint/DevilPrint-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		72B1D813197CB87200C9896B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/DevilPrint.app/DevilPrint";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "DevilPrint/DevilPrint-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "DevilPrintTests/DevilPrintTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		72B1D814197CB87200C9896B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/DevilPrint.app/DevilPrint";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "DevilPrint/DevilPrint-Prefix.pch";
+				INFOPLIST_FILE = "DevilPrintTests/DevilPrintTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		72B1D7D5197CB87200C9896B /* Build configuration list for PBXProject "DevilPrint" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				72B1D80D197CB87200C9896B /* Debug */,
+				72B1D80E197CB87200C9896B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		72B1D80F197CB87200C9896B /* Build configuration list for PBXNativeTarget "DevilPrint" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				72B1D810197CB87200C9896B /* Debug */,
+				72B1D811197CB87200C9896B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		72B1D812197CB87200C9896B /* Build configuration list for PBXNativeTarget "DevilPrintTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				72B1D813197CB87200C9896B /* Debug */,
+				72B1D814197CB87200C9896B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 72B1D7D2197CB87200C9896B /* Project object */;
+}
