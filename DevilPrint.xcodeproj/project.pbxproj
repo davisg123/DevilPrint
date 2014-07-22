@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7296AF0C197DFF0D00841057 /* DPRPrintManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7296AF0B197DFF0D00841057 /* DPRPrintManager.m */; };
 		72B1D7DE197CB87200C9896B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72B1D7DD197CB87200C9896B /* Foundation.framework */; };
 		72B1D7E0197CB87200C9896B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72B1D7DF197CB87200C9896B /* CoreGraphics.framework */; };
 		72B1D7E2197CB87200C9896B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72B1D7E1197CB87200C9896B /* UIKit.framework */; };
@@ -48,6 +49,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7296AF0A197DFF0D00841057 /* DPRPrintManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DPRPrintManager.h; sourceTree = "<group>"; };
+		7296AF0B197DFF0D00841057 /* DPRPrintManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DPRPrintManager.m; sourceTree = "<group>"; };
 		72B1D7DA197CB87200C9896B /* DevilPrint.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DevilPrint.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		72B1D7DD197CB87200C9896B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		72B1D7DF197CB87200C9896B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -202,6 +205,8 @@
 			children = (
 				72B1D818197CBAA800C9896B /* DPRDataModel.h */,
 				72B1D819197CBAA800C9896B /* DPRDataModel.m */,
+				7296AF0A197DFF0D00841057 /* DPRPrintManager.h */,
+				7296AF0B197DFF0D00841057 /* DPRPrintManager.m */,
 				72B1D93B197CD47200C9896B /* DPRSite.h */,
 				72B1D93C197CD47200C9896B /* DPRSite.m */,
 				72B1D938197CCBF300C9896B /* DPRStatus.h */,
@@ -357,6 +362,7 @@
 				72B1D934197CC00700C9896B /* DPRPrinter.m in Sources */,
 				72B1D92F197CBE4300C9896B /* AFURLRequestSerialization.m in Sources */,
 				72B1D92B197CBE4300C9896B /* AFHTTPSessionManager.m in Sources */,
+				7296AF0C197DFF0D00841057 /* DPRPrintManager.m in Sources */,
 				72B1D92C197CBE4300C9896B /* AFNetworkReachabilityManager.m in Sources */,
 				72B1D930197CBE4300C9896B /* AFURLResponseSerialization.m in Sources */,
 				72B1D931197CBE4300C9896B /* AFURLSessionManager.m in Sources */,
@@ -576,6 +582,7 @@
 				72B1D811197CB87200C9896B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		72B1D812197CB87200C9896B /* Build configuration list for PBXNativeTarget "DevilPrintTests" */ = {
 			isa = XCConfigurationList;
@@ -584,6 +591,7 @@
 				72B1D814197CB87200C9896B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

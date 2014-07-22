@@ -6,6 +6,15 @@
 //  Copyright (c) 2014 Davis Gossage. All rights reserved.
 //
 
+
+/****************
+ 
+ 
+ responsible for getting printers (all or nearby) and all associated information about them
+
+
+*****************/
+
 #import <Foundation/Foundation.h>
 #import "DPRPrinter.h"
 #import "DPRStatus.h"
