@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		721F823A197E203900407F59 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 721F8239197E203900407F59 /* CoreLocation.framework */; };
+		721F823C197E207300407F59 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 721F823B197E207300407F59 /* MapKit.framework */; };
+		721F823E197E2BEB00407F59 /* Google_homepage_nexus_before.png in Resources */ = {isa = PBXBuildFile; fileRef = 721F823D197E2BEB00407F59 /* Google_homepage_nexus_before.png */; };
 		7296AF0C197DFF0D00841057 /* DPRPrintManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7296AF0B197DFF0D00841057 /* DPRPrintManager.m */; };
 		72B1D7DE197CB87200C9896B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72B1D7DD197CB87200C9896B /* Foundation.framework */; };
 		72B1D7E0197CB87200C9896B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72B1D7DF197CB87200C9896B /* CoreGraphics.framework */; };
@@ -49,6 +52,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		721F8239197E203900407F59 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		721F823B197E207300407F59 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		721F823D197E2BEB00407F59 /* Google_homepage_nexus_before.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Google_homepage_nexus_before.png; sourceTree = "<group>"; };
 		7296AF0A197DFF0D00841057 /* DPRPrintManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DPRPrintManager.h; sourceTree = "<group>"; };
 		7296AF0B197DFF0D00841057 /* DPRPrintManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DPRPrintManager.m; sourceTree = "<group>"; };
 		72B1D7DA197CB87200C9896B /* DevilPrint.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DevilPrint.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -105,6 +111,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				721F823C197E207300407F59 /* MapKit.framework in Frameworks */,
+				721F823A197E203900407F59 /* CoreLocation.framework in Frameworks */,
 				72B1D7E0197CB87200C9896B /* CoreGraphics.framework in Frameworks */,
 				72B1D7E2197CB87200C9896B /* UIKit.framework in Frameworks */,
 				72B1D7DE197CB87200C9896B /* Foundation.framework in Frameworks */,
@@ -146,6 +154,8 @@
 		72B1D7DC197CB87200C9896B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				721F823B197E207300407F59 /* MapKit.framework */,
+				721F8239197E203900407F59 /* CoreLocation.framework */,
 				72B1D7DD197CB87200C9896B /* Foundation.framework */,
 				72B1D7DF197CB87200C9896B /* CoreGraphics.framework */,
 				72B1D7E1197CB87200C9896B /* UIKit.framework */,
@@ -160,6 +170,7 @@
 				72B1D81B197CBE1800C9896B /* Submodules */,
 				72B1D815197CB9D100C9896B /* Data Model */,
 				72B1D7EC197CB87200C9896B /* DPRAppDelegate.h */,
+				721F823D197E2BEB00407F59 /* Google_homepage_nexus_before.png */,
 				72B1D7ED197CB87200C9896B /* DPRAppDelegate.m */,
 				72B1D7EF197CB87200C9896B /* Main_iPhone.storyboard */,
 				72B1D7F2197CB87200C9896B /* Main_iPad.storyboard */,
@@ -333,6 +344,7 @@
 				72B1D7F9197CB87200C9896B /* Images.xcassets in Resources */,
 				72B1D7F1197CB87200C9896B /* Main_iPhone.storyboard in Resources */,
 				72B1D7E8197CB87200C9896B /* InfoPlist.strings in Resources */,
+				721F823E197E2BEB00407F59 /* Google_homepage_nexus_before.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

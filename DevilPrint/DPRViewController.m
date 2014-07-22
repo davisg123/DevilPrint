@@ -7,6 +7,7 @@
 //
 
 #import "DPRViewController.h"
+#import <CoreLocation/CoreLocation.h>
 
 @interface DPRViewController ()
 
