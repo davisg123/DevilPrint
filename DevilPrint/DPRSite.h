@@ -35,7 +35,7 @@
 @property NSString* building;
 @property NSString* room;
 @property NSString* directions;
-@property CLLocationCoordinate2D* loc;
+@property CLLocation* location;
 @property NSString* retired;
 @property NSDate* createdAt;
 @property NSDate* updatedAt;

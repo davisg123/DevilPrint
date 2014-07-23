@@ -10,6 +10,7 @@
 		721F823A197E203900407F59 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 721F8239197E203900407F59 /* CoreLocation.framework */; };
 		721F823C197E207300407F59 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 721F823B197E207300407F59 /* MapKit.framework */; };
 		721F823E197E2BEB00407F59 /* Google_homepage_nexus_before.png in Resources */ = {isa = PBXBuildFile; fileRef = 721F823D197E2BEB00407F59 /* Google_homepage_nexus_before.png */; };
+		728752E8197F5C6E00C42F4A /* DPRPrinterTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 728752E7197F5C6E00C42F4A /* DPRPrinterTableViewCell.m */; };
 		7296AF0C197DFF0D00841057 /* DPRPrintManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7296AF0B197DFF0D00841057 /* DPRPrintManager.m */; };
 		72B1D7DE197CB87200C9896B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72B1D7DD197CB87200C9896B /* Foundation.framework */; };
 		72B1D7E0197CB87200C9896B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72B1D7DF197CB87200C9896B /* CoreGraphics.framework */; };
@@ -55,6 +56,8 @@
 		721F8239197E203900407F59 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		721F823B197E207300407F59 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		721F823D197E2BEB00407F59 /* Google_homepage_nexus_before.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Google_homepage_nexus_before.png; sourceTree = "<group>"; };
+		728752E6197F5C6E00C42F4A /* DPRPrinterTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DPRPrinterTableViewCell.h; sourceTree = "<group>"; };
+		728752E7197F5C6E00C42F4A /* DPRPrinterTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DPRPrinterTableViewCell.m; sourceTree = "<group>"; };
 		7296AF0A197DFF0D00841057 /* DPRPrintManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DPRPrintManager.h; sourceTree = "<group>"; };
 		7296AF0B197DFF0D00841057 /* DPRPrintManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DPRPrintManager.m; sourceTree = "<group>"; };
 		72B1D7DA197CB87200C9896B /* DevilPrint.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DevilPrint.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -132,6 +135,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		728752E5197F5C1700C42F4A /* Interface */ = {
+			isa = PBXGroup;
+			children = (
+				728752E6197F5C6E00C42F4A /* DPRPrinterTableViewCell.h */,
+				728752E7197F5C6E00C42F4A /* DPRPrinterTableViewCell.m */,
+			);
+			name = Interface;
+			sourceTree = "<group>";
+		};
 		72B1D7D1197CB87200C9896B = {
 			isa = PBXGroup;
 			children = (
@@ -167,6 +179,7 @@
 		72B1D7E3197CB87200C9896B /* DevilPrint */ = {
 			isa = PBXGroup;
 			children = (
+				728752E5197F5C1700C42F4A /* Interface */,
 				72B1D81B197CBE1800C9896B /* Submodules */,
 				72B1D815197CB9D100C9896B /* Data Model */,
 				72B1D7EC197CB87200C9896B /* DPRAppDelegate.h */,
@@ -364,6 +377,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				72B1D7EA197CB87200C9896B /* main.m in Sources */,
+				728752E8197F5C6E00C42F4A /* DPRPrinterTableViewCell.m in Sources */,
 				72B1D92D197CBE4300C9896B /* AFSecurityPolicy.m in Sources */,
 				72B1D7EE197CB87200C9896B /* DPRAppDelegate.m in Sources */,
 				72B1D93A197CCBF300C9896B /* DPRStatus.m in Sources */,

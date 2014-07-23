@@ -27,5 +27,7 @@
 //get an array of all the printers
 -(void)populatePrinterListWithCompletion:(void(^)(NSArray *list, NSError *error))completion;
 
+-(NSArray *)printersNearLocation:(CLLocation *)location;
+
 
 @end

@@ -13,12 +13,39 @@
 
 static DPRDataModel* gSharedInstance = nil;
 NSArray *allSites;
+NSArray *printerList;
 
 +(DPRDataModel*)sharedInstance {
     if (!gSharedInstance) {
         gSharedInstance = [[DPRDataModel alloc] init];
     }
     return gSharedInstance;
+}
+
+#pragma mark public calls
+
+-(NSArray *)printersNearLocation:(CLLocation *)myLocation{
+    if (!printerList){
+        return nil;
+    }
+    else{
+        printerList = [printerList sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+            DPRPrinter *printer1 = (DPRPrinter*)obj1;
+            float distance1 = [myLocation distanceFromLocation:printer1.site.location];
+            DPRPrinter *printer2 = (DPRPrinter*)obj2;
+            float distance2 = [myLocation distanceFromLocation:printer2.site.location];
+            if (distance1 > distance2){
+                return NSOrderedDescending;
+            }
+            else if (distance1 < distance2){
+                return NSOrderedAscending;
+            }
+            else{
+                return NSOrderedSame;
+            }
+        }];
+        return printerList;
+    }
 }
 
 -(void)populatePrinterListWithCompletion:(void(^)(NSArray *list, NSError *error))completion{
@@ -31,12 +58,15 @@ NSArray *allSites;
         else{
             [self allPrintersWithCompletion:^(NSArray *list, NSError *error) {
                 if (completion){
+                    printerList = list;
                     completion(list,error);
                 }
             }];
         }
     }];
 }
+
+#pragma mark internal calls
 
 -(void)allPrintersWithCompletion:(void(^)(NSArray *list, NSError *error))completion{
     NSString *urlString = [NSString stringWithFormat:@"https://streamer.oit.duke.edu/eprint/printers?access_token=%@",[[NSUserDefaults standardUserDefaults] stringForKey:@"streamerKey"]];
@@ -56,15 +86,15 @@ NSArray *allSites;
                 printer.severity = [properties objectForKey:@"severity"];
                 printer.createdAt = [self stringToDate:[properties objectForKey:@"created_at"]];
                 printer.updatedAt = [self stringToDate:[properties objectForKey:@"updated_at"]];
+                DPRStatus *status = [DPRStatus new];
                 if ([[properties objectForKey:@"statuses"] count] != 0){
                     //printer status is a DPRStatus object
-                    DPRStatus *status = [DPRStatus new];
                     NSDictionary *statusDict = [[properties objectForKey:@"statuses"] objectAtIndex:0];
                     status.name = [statusDict objectForKey:@"name"];
                     status.severity = [statusDict objectForKey:@"severity"];
                     status.createdAt = [self stringToDate:[statusDict objectForKey:@"created_at"]];
-                    printer.status = status;
                 }
+                printer.status = status;
                 //printer site is a DPRSite object
                 NSArray *siteIds = [allSites valueForKey:@"siteId"];
                 //check this printer's site id against the list of all site ids
@@ -105,7 +135,7 @@ NSArray *allSites;
                     site.campus = [properties objectForKey:@"campus"];
                     site.building = [properties objectForKey:@"building"];
                     site.room = [properties objectForKey:@"room"];
-                    site.directions = [properties objectForKey:@"directions"];
+                    site.directions = [properties objectForKey:@"directions"] ?: @"";
                     site.retired = [properties objectForKey:@"retired"];
                     site.createdAt = [self stringToDate:[properties objectForKey:@"created_at"]];
                     site.updatedAt = [self stringToDate:[properties objectForKey:@"updated_at"]];
@@ -113,6 +143,7 @@ NSArray *allSites;
                     id numPrinters = [properties objectForKey:@"printers"];
                     //sometimes this key has a null value
                     site.numPrinters = [numPrinters isKindOfClass:[NSNull class]] ? 0 : [numPrinters intValue];
+                    site.location = [[CLLocation alloc] initWithLatitude:[[properties objectForKey:@"latitude"] doubleValue] longitude:[[properties objectForKey:@"longitude"] doubleValue]];
                     [sites addObject:site];
                 }
                 allSites = sites;
@@ -123,6 +154,8 @@ NSArray *allSites;
         }];
     }
 }
+
+#pragma mark helper methods
 
 -(void)networkRequestWithURLString:(NSString*)urlString withCompletion:(void(^)(id response, NSError *error))completion{
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];

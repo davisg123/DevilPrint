@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreLocation/CoreLocation.h>
 
-@interface DPRViewController : UIViewController
+@interface DPRViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,CLLocationManagerDelegate>
 
 @end
