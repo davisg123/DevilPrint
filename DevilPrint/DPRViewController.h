@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
+#import <MapKit/MapKit.h>
 
-@interface DPRViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,CLLocationManagerDelegate>
+@interface DPRViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,CLLocationManagerDelegate,UICollectionViewDataSource,UICollectionViewDelegate,MKMapViewDelegate>
 
 @end

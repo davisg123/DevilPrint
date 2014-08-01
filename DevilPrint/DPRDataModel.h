@@ -11,6 +11,7 @@
  
  
  responsible for getting printers (all or nearby) and all associated information about them
+ also handles the file directory, documents that are opened in the app go in this directory
 
 
 *****************/
@@ -27,7 +28,11 @@
 //get an array of all the printers
 -(void)populatePrinterListWithCompletion:(void(^)(NSArray *list, NSError *error))completion;
 
+//get an array of all the printers near a location
 -(NSArray *)printersNearLocation:(CLLocation *)location;
+
+//get a list of files from the app directory
+-(NSArray *)fileList;
 
 
 @end

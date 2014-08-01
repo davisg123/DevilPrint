@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7202F561198B3E3B00A45421 /* DPRFileCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7202F560198B3E3B00A45421 /* DPRFileCollectionViewCell.m */; };
 		721F823A197E203900407F59 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 721F8239197E203900407F59 /* CoreLocation.framework */; };
 		721F823C197E207300407F59 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 721F823B197E207300407F59 /* MapKit.framework */; };
 		721F823E197E2BEB00407F59 /* Google_homepage_nexus_before.png in Resources */ = {isa = PBXBuildFile; fileRef = 721F823D197E2BEB00407F59 /* Google_homepage_nexus_before.png */; };
@@ -53,6 +54,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7202F55F198B3E3B00A45421 /* DPRFileCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DPRFileCollectionViewCell.h; sourceTree = "<group>"; };
+		7202F560198B3E3B00A45421 /* DPRFileCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DPRFileCollectionViewCell.m; sourceTree = "<group>"; };
 		721F8239197E203900407F59 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		721F823B197E207300407F59 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		721F823D197E2BEB00407F59 /* Google_homepage_nexus_before.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Google_homepage_nexus_before.png; sourceTree = "<group>"; };
@@ -140,6 +143,8 @@
 			children = (
 				728752E6197F5C6E00C42F4A /* DPRPrinterTableViewCell.h */,
 				728752E7197F5C6E00C42F4A /* DPRPrinterTableViewCell.m */,
+				7202F55F198B3E3B00A45421 /* DPRFileCollectionViewCell.h */,
+				7202F560198B3E3B00A45421 /* DPRFileCollectionViewCell.m */,
 			);
 			name = Interface;
 			sourceTree = "<group>";
@@ -383,6 +388,7 @@
 				72B1D93A197CCBF300C9896B /* DPRStatus.m in Sources */,
 				72B1D92A197CBE4300C9896B /* AFHTTPRequestOperationManager.m in Sources */,
 				72B1D92E197CBE4300C9896B /* AFURLConnectionOperation.m in Sources */,
+				7202F561198B3E3B00A45421 /* DPRFileCollectionViewCell.m in Sources */,
 				72B1D929197CBE4300C9896B /* AFHTTPRequestOperation.m in Sources */,
 				72B1D81A197CBAA800C9896B /* DPRDataModel.m in Sources */,
 				72B1D934197CC00700C9896B /* DPRPrinter.m in Sources */,

@@ -22,7 +22,7 @@ NSArray *printerList;
     return gSharedInstance;
 }
 
-#pragma mark public calls
+#pragma mark printer info
 
 -(NSArray *)printersNearLocation:(CLLocation *)myLocation{
     if (!printerList){
@@ -65,8 +65,6 @@ NSArray *printerList;
         }
     }];
 }
-
-#pragma mark internal calls
 
 -(void)allPrintersWithCompletion:(void(^)(NSArray *list, NSError *error))completion{
     NSString *urlString = [NSString stringWithFormat:@"https://streamer.oit.duke.edu/eprint/printers?access_token=%@",[[NSUserDefaults standardUserDefaults] stringForKey:@"streamerKey"]];
@@ -155,7 +153,7 @@ NSArray *printerList;
     }
 }
 
-#pragma mark helper methods
+#pragma mark printer helper methods
 
 -(void)networkRequestWithURLString:(NSString*)urlString withCompletion:(void(^)(id response, NSError *error))completion{
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
@@ -179,6 +177,28 @@ NSArray *printerList;
     NSDate *dateFromString = [dateFormatter dateFromString:dateString];
     
     return dateFromString;
+}
+
+#pragma mark file access
+
+-(NSArray*)fileList{
+    NSMutableArray *files = [NSMutableArray new];
+    NSString *resourcePath = [[NSBundle mainBundle] resourcePath];
+    NSString *documentsPath = [[resourcePath stringByDeletingLastPathComponent] stringByAppendingPathComponent:@"Documents/Inbox"];
+    NSArray *directoryContents = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:documentsPath error:nil];
+    NSArray *sortedFileList = [directoryContents sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+        NSDictionary *firstFile  = [[NSFileManager defaultManager] attributesOfItemAtPath:[NSString stringWithFormat:@"%@/%@", documentsPath, obj1] error:nil];
+        NSDate *firstFileDate             = [firstFile  objectForKey:NSFileModificationDate];
+        NSDictionary *secondFile = [[NSFileManager defaultManager] attributesOfItemAtPath:[NSString stringWithFormat:@"%@/%@", documentsPath, obj2] error:nil];
+        NSDate *secondFileDate            = [secondFile objectForKey:NSFileModificationDate];
+        return [secondFileDate compare:firstFileDate];
+    }];
+    for (int i=0;i<[sortedFileList count];i++){
+        NSString *fileName = [sortedFileList objectAtIndex:i];
+        fileName = [documentsPath stringByAppendingPathComponent:fileName];
+        [files addObject:fileName];
+    }
+    return files;
 }
 
 @end
