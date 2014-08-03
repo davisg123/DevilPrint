@@ -10,15 +10,19 @@
 
 @interface DPRFileCollectionViewCell(){
     IBOutlet UIWebView *fileWebView;
+    IBOutlet UIButton *printButton;
 }
+
+@property NSURL *urlToPrint;
 
 @end
 
 @implementation DPRFileCollectionViewCell
+@synthesize urlToPrint;
 
-- (id)initWithFrame:(CGRect)frame
+- (id)initWithCoder:(NSCoder *)aDecoder
 {
-    self = [super initWithFrame:frame];
+    self = [super initWithCoder:aDecoder];
     if (self) {
         // Initialization code
     }
@@ -26,14 +30,16 @@
 }
 
 - (void)prepareForReuse{
+    //go to an empty website so cells don't display other cell's files
     [fileWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"about:blank"]]];
 }
 
 - (void)showFile:(NSString *)fileString{
     fileWebView.delegate = self;
-    NSURL *url = [NSURL fileURLWithPath:fileString];
-    NSURLRequest *req = [NSURLRequest requestWithURL:url];
+    urlToPrint = [NSURL fileURLWithPath:fileString];
+    NSURLRequest *req = [NSURLRequest requestWithURL:urlToPrint];
     [fileWebView loadRequest:req];
+    [printButton setTitle:urlToPrint.lastPathComponent forState:UIControlStateNormal];
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)theWebView
@@ -47,6 +53,13 @@
     theWebView.scrollView.maximumZoomScale = rw;
     theWebView.scrollView.zoomScale = rw;
 }
+
+- (IBAction)printButtonTapped:(id)sender{
+    if ([self.delegate respondsToSelector:@selector(userWantsToPrint:)]){
+        [self.delegate userWantsToPrint:urlToPrint];
+    }
+}
+
 
 /*
 // Only override drawRect: if you perform custom drawing.

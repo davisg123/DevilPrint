@@ -8,7 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol DPRFileCollectionViewCellDelegate <NSObject>
+
+- (void)userWantsToPrint:(NSURL*)urlToPrint;
+
+@end
+
 @interface DPRFileCollectionViewCell : UICollectionViewCell<UIWebViewDelegate>
+
+@property (nonatomic,weak) id<DPRFileCollectionViewCellDelegate> delegate;
 
 - (void)showFile:(NSString*)fileString;
 

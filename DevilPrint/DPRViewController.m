@@ -10,15 +10,16 @@
 #import <CoreLocation/CoreLocation.h>
 #import "DPRDataModel.h"
 #import "DPRPrinterTableViewCell.h"
-#import "DPRFileCollectionViewCell.h"
+#import "FXBlurView.h"
 
 @interface DPRViewController (){
     IBOutlet UITableView *printerTableView;
     IBOutlet UICollectionView *fileCollectionView;
-    IBOutlet UICollectionView *tabCollectionView;           ///<secondary collection view for showing the tabs above files
     IBOutlet MKMapView *printerMapView;
     CLLocationManager *locationManager;
     CLLocation *currentLocation;
+    UIView *printDrawerView;                                ///< popup for selecting options.  a drawer like a sliding thing, nothing is drawn
+    FXBlurView *blurView;                                   ///< blur view shown behind print drawer
 }
 
 @end
@@ -122,28 +123,45 @@ NSArray *fileList;
 #pragma mark collectionView data source
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    if (collectionView == fileCollectionView){
-        return [fileList count];
-    }
-    else{
-        //it's the tab collection view
-        return 3;
-    }
+    return [fileList count];
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
-    if (collectionView == fileCollectionView){
-        DPRFileCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"fileCell" forIndexPath:indexPath];
-        [cell showFile:[fileList objectAtIndex:indexPath.row]];
-        return cell;
-    }
-    else{
-        //it's the tab collection view
-        UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"tabCell" forIndexPath:indexPath];
-        return cell;
-    }
+    DPRFileCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"fileCell" forIndexPath:indexPath];
+    cell.delegate = self;
+    [cell showFile:[fileList objectAtIndex:indexPath.row]];
+    return cell;
 }
 
+#pragma mark DPRFileCollectionViewCellDelegate
 
+- (IBAction)userWantsToPrint:(NSURL *)urlToPrint{
+    //blur the table and show the print dialog
+    blurView = [[FXBlurView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+    blurView.dynamic = false;
+    blurView.blurRadius = 20.0;
+    blurView.tintColor = [UIColor clearColor];
+    //detect tap in the blur view (this will hide the print drawer)
+    UITapGestureRecognizer *backgroundTap =
+    [[UITapGestureRecognizer alloc] initWithTarget:self
+                                            action:@selector(handleBackgroundTap:)];
+    [blurView addGestureRecognizer:backgroundTap];
+    
+
+    printDrawerView = [[[NSBundle mainBundle] loadNibNamed:@"printDrawer" owner:self options:nil] lastObject];
+    printDrawerView.frame = CGRectMake(0, 0, printDrawerView.frame.size.width, printDrawerView.frame.size.height);
+    printDrawerView.alpha = 0;
+    [self.view insertSubview:printDrawerView belowSubview:fileCollectionView];
+    blurView.alpha = 0;
+    [self.view insertSubview:blurView aboveSubview:printerTableView];
+    [UIView animateWithDuration:0.5 animations:^{
+        printDrawerView.alpha = 1.0;
+        blurView.alpha = 1.0;
+    }];
+}
+
+- (void)handleBackgroundTap:(UITapGestureRecognizer *)recognizer {
+    
+}
 
 @end

@@ -13,7 +13,7 @@
 
 @synthesize netId,copies,duplex,selectedPrinter,firstPage,lastPage,reverseOrder;
 
-#define serviceEndpoint @"[domain]/eprint/1.0/print"
+#define serviceEndpoint @"http://api.colab.duke.edu/api/eprint/1.0/print"
 
 static DPRPrintManager* gSharedInstance = nil;
 
