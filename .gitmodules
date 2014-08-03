@@ -4,3 +4,6 @@
 [submodule "Submodules/FXBlurView"]
 	path = Submodules/FXBlurView
 	url = https://github.com/goose2460/FXBlurView
+[submodule "Submodules/NMRangeSlider"]
+	path = Submodules/NMRangeSlider
+	url = https://github.com/goose2460/NMRangeSlider
