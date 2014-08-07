@@ -161,12 +161,17 @@
                                                         <action selector="printButtonTapped:" destination="een-5V-Gb6" eventType="touchUpInside" id="dYr-eZ-bkU"/>
                                                     </connections>
                                                 </button>
+                                                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="uj8-hk-K0t">
+                                                    <rect key="frame" x="142" y="32" width="37" height="37"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </activityIndicatorView>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <connections>
                                             <outlet property="fileWebView" destination="Zm1-oS-3ew" id="GgJ-sU-9V2"/>
                                             <outlet property="printButton" destination="Mxk-gz-c6R" id="LSM-vX-efo"/>
+                                            <outlet property="printStatusIndicator" destination="uj8-hk-K0t" id="sDi-mB-HEw"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>

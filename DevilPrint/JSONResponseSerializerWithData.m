@@ -14,8 +14,8 @@
             userInfo[JSONResponseSerializerWithDataKey] = @"";
 			//userInfo[JSONResponseSerializerWithDataKey] = [NSData data];
 		} else {
-            //			// NOTE: You might want to convert data to a string here too, up to you.
-            userInfo[JSONResponseSerializerWithDataKey] = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            //			// NOTE: You might want to convert data to a dictionary here too, up to you.
+            userInfo[JSONResponseSerializerWithDataKey] = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
 			//userInfo[JSONResponseSerializerWithDataKey] = data;
 		}
 		NSError *newError = [NSError errorWithDomain:(*error).domain code:(*error).code userInfo:userInfo];

@@ -25,4 +25,6 @@
 - (void)restoreButtonLabel;
 
 - (void)flashSuccess;
+
+- (void)printingDidStart;
 @end

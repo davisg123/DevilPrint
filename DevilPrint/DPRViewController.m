@@ -185,17 +185,35 @@ NSArray *fileList;
     
     if (printSheetView){
         //print dialog is already active, send to print manager
+        //lock down print dialog and print button
+        printSheetView.userInteractionEnabled = false;
+        fileCollectionView.userInteractionEnabled = false;
+        //make the cell show a spinner
+        [currentFileCell printingDidStart];
         [[DPRPrintManager sharedInstance] printFile:urlToPrint WithCompletion:^(NSError *error) {
             if (error){
-                NSLog(@"%@",[error.userInfo objectForKey:JSONResponseSerializerWithDataKey]);
+                NSDictionary *errorDescription = [error.userInfo objectForKey:JSONResponseSerializerWithDataKey];
+                if ([errorDescription objectForKey:@"message"]){
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:[errorDescription objectForKey:@"message"] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+                    [alert show];
+                }
+                else{
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"We're having some trouble talking to our server.  If it's not your connection it's probably us, and we're on it." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+                    [alert show];
+                }
+                [currentFileCell restoreButtonLabel];
+                [self removePrintSheet];
             }
             else{
+                //make the cell show a success message
                 [currentFileCell flashSuccess];
                 [self removePrintSheet];
             }
         }];
     }
     else{
+        //lock down the collection view
+        fileCollectionView.scrollEnabled = false;
         //blur the table and show the print dialog
         blurView = [[FXBlurView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
         blurView.dynamic = false;
@@ -243,6 +261,9 @@ NSArray *fileList;
         printSheetView = nil;
         blurView = nil;
     }];
+    //reenable the scroll on the collection view
+    fileCollectionView.scrollEnabled = true;
+    fileCollectionView.userInteractionEnabled = true;
 }
 
 #pragma mark activity view
