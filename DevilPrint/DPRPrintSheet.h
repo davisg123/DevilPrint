@@ -12,6 +12,7 @@
 
 
 - (void)fillExistingSettings;
+- (void)constrainSliderToMinVal:(int)min MaxVal:(int)max;
 
 
 @end

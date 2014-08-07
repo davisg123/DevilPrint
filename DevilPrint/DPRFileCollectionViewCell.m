@@ -58,6 +58,11 @@
     [printButton setTitle:urlToPrint.lastPathComponent forState:UIControlStateNormal];
 }
 
+- (void)flashSuccess{
+    [printButton setTitle:@"Success!" forState:UIControlStateNormal];
+    [self performSelector:@selector(restoreButtonLabel) withObject:nil afterDelay:3.0];
+}
+
 - (IBAction)printButtonTapped:(id)sender{
     if ([self.delegate respondsToSelector:@selector(userWantsToPrint:sender:)]){
         [printButton setTitle:@"Print File" forState:UIControlStateNormal];

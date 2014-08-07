@@ -23,4 +23,6 @@
 - (IBAction)printButtonTapped:(id)sender;
 
 - (void)restoreButtonLabel;
+
+- (void)flashSuccess;
 @end

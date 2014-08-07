@@ -12,8 +12,6 @@
 
 @implementation DPRPrintManager
 
-@synthesize netId,copies,duplex,selectedPrinter,firstPage,lastPage,reverseOrder;
-
 #define serviceEndpoint @"http://api.colab.duke.edu/api/eprint/1.0/print"
 
 static DPRPrintManager* gSharedInstance = nil;
@@ -92,6 +90,15 @@ static DPRPrintManager* gSharedInstance = nil;
     return [[NSUserDefaults standardUserDefaults] boolForKey:@"reverseOrder"];
 }
 
+- (void)setPagesPerSheet:(NSNumber *)p{
+    [[NSUserDefaults standardUserDefaults] setObject:p forKey:@"pagesPerSheet"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (NSNumber*)pagesPerSheet{
+    return [[NSUserDefaults standardUserDefaults] objectForKey:@"pagesPerSheet"];
+}
+
 
 #pragma mark api requests
 
@@ -99,29 +106,32 @@ static DPRPrintManager* gSharedInstance = nil;
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     // *** Use our custom response serializer ***
     manager.responseSerializer = [JSONResponseSerializerWithData serializer];
-    //gonna need some clarification on what happens if NSNulls get put in the dictionary
+    //server api is documented at streamer.oit.duke.edu
     NSMutableDictionary *params = [NSMutableDictionary new];
     
-    if (1){
-        [params setObject:@"$#^#Y@$%($#(%F#$G#$G#%G" forKey:@"netid"];
+    if (self.netId){
+        [params setObject:self.netId forKey:@"netid"];
     }
-    if (copies){
-        [params setObject:copies forKey:@"copies"];
+    if (self.copies){
+        [params setObject:self.copies forKey:@"copies"];
     }
-    if (duplex){
-        [params setObject:[NSNumber numberWithBool:duplex] forKey:@"duplex"];
+    if (self.duplex){
+        [params setObject:[NSNumber numberWithBool:self.duplex] forKey:@"duplex"];
     }
-    if (selectedPrinter){
-        [params setObject:selectedPrinter forKey:@"printers"];
+    if (self.selectedPrinter){
+        [params setObject:self.selectedPrinter forKey:@"printers"];
     }
-    if (firstPage){
-        [params setObject:firstPage forKey:@"first_page"];
+    if (self.firstPage){
+        [params setObject:self.firstPage forKey:@"first_page"];
     }
-    if (lastPage){
-        [params setObject:lastPage forKey:@"last_page"];
+    if (self.lastPage){
+        [params setObject:self.lastPage forKey:@"last_page"];
     }
-    if (reverseOrder){
-        [params setObject:[NSNumber numberWithBool:reverseOrder] forKey:@"reverse_order"];
+    if (self.reverseOrder){
+        [params setObject:[NSNumber numberWithBool:self.reverseOrder] forKey:@"reverse_order"];
+    }
+    if (self.pagesPerSheet){
+        [params setObject:self.pagesPerSheet forKey:@"number_up"];
     }
     
     [manager POST:serviceEndpoint parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
@@ -139,6 +149,16 @@ static DPRPrintManager* gSharedInstance = nil;
     //not implemented on server yet
 }
 
+
+-(int)numberOfPagesForFileUrl:(NSURL *)url{
+    CGPDFDocumentRef pdf = CGPDFDocumentCreateWithURL((CFURLRef)url);
+    if(pdf){
+        return CGPDFDocumentGetNumberOfPages(pdf);
+    }
+    else{
+        return 0;
+    }
+}
 
 
 

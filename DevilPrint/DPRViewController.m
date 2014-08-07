@@ -175,6 +175,10 @@ NSArray *fileList;
             if (error){
                 NSLog(@"%@",[error.userInfo objectForKey:JSONResponseSerializerWithDataKey]);
             }
+            else{
+                [currentFileCell flashSuccess];
+                [self removePrintSheet];
+            }
         }];
     }
     else{
@@ -195,6 +199,10 @@ NSArray *fileList;
         printSheetView.alpha = 0;
         [self.view insertSubview:printSheetView belowSubview:fileCollectionView];
         [printSheetView fillExistingSettings];
+        int pages = [[DPRPrintManager sharedInstance] numberOfPagesForFileUrl:urlToPrint];
+        //a 0 page count means we don't know it
+        //this will hide the range selector
+        [printSheetView constrainSliderToMinVal:1 MaxVal:pages];
         blurView.alpha = 0;
         [self.view insertSubview:blurView aboveSubview:printerTableView];
         [UIView animateWithDuration:0.5 animations:^{
@@ -208,6 +216,10 @@ NSArray *fileList;
     if ([currentFileCell respondsToSelector:@selector(restoreButtonLabel)]){
         [currentFileCell restoreButtonLabel];
     }
+    [self removePrintSheet];
+}
+
+- (void)removePrintSheet{
     [UIView animateWithDuration:.5 animations:^{
         printSheetView.alpha = 0.0;
         blurView.alpha = 0.0;
