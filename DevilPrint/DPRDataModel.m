@@ -28,6 +28,9 @@ NSArray *printerList;
     if (!printerList){
         return nil;
     }
+    else if(!myLocation){
+        return printerList;
+    }
     else{
         printerList = [printerList sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
             DPRPrinter *printer1 = (DPRPrinter*)obj1;

@@ -21,9 +21,10 @@
     IBOutlet MKMapView *printerMapView;
     CLLocationManager *locationManager;
     CLLocation *currentLocation;
-    DPRPrintSheet *printSheetView;                                ///< popup for selecting options.  a drawer like a sliding thing, nothing is drawn
+    DPRPrintSheet *printSheetView;                          ///< popup for selecting options.  a drawer like a sliding thing, nothing is drawn
     FXBlurView *blurView;                                   ///< blur view shown behind print drawer
-    DPRFileCollectionViewCell *currentFileCell;                 ///< the cell from which we are printing
+    DPRFileCollectionViewCell *currentFileCell;             ///< the cell from which we are printing
+    IBOutlet UIView *activityView;                                   ///< activity view showing when printers are being fetched
 }
 
 @end
@@ -111,6 +112,7 @@ NSArray *fileList;
         [printerMapView setRegion:mapRegion animated: YES];
         [[DPRDataModel sharedInstance] populatePrinterListWithCompletion:^(NSArray *list, NSError *error) {
             printerList = [[DPRDataModel sharedInstance] printersNearLocation:currentLocation];
+            [self hideActivityView];
             [printerTableView reloadData];
         }];
     }
@@ -119,8 +121,19 @@ NSArray *fileList;
 -(void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error{
     if([CLLocationManager locationServicesEnabled]){
         if([CLLocationManager authorizationStatus]==kCLAuthorizationStatusDenied){
-            //just fetch the normal old list of printers
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Location Services Disabled"
+                                               message:@"This app is a lot more useful when it knows where you are.  To re-enable, please go to Settings and turn on Location Service for this app."
+                                              delegate:nil
+                                     cancelButtonTitle:@"OK"
+                                     otherButtonTitles:nil];
+            [alert show];
         }
+        //just fetch the normal full list of printers
+        [[DPRDataModel sharedInstance] populatePrinterListWithCompletion:^(NSArray *list, NSError *error) {
+            printerList = list;
+            [self hideActivityView];
+            [printerTableView reloadData];
+        }];
     }
 }
 
@@ -138,17 +151,18 @@ NSArray *fileList;
     DPRPrinterTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"printerCell" forIndexPath:indexPath];
     DPRPrinter *printer = [printerList objectAtIndex:indexPath.row];
     [cell setPrinter:printer];
-    float meters = [currentLocation distanceFromLocation:printer.site.location];
-    float feet = meters * 3.28084;
-    float miles = feet * 0.000189394;
-    if (miles < 1){
-        [cell setDLabel:[NSString stringWithFormat:@"%.0f f",feet]];
-        return cell;
+    if (currentLocation){
+        float meters = [currentLocation distanceFromLocation:printer.site.location];
+        float feet = meters * 3.28084;
+        float miles = feet * 0.000189394;
+        if (miles < 1){
+            [cell setDLabel:[NSString stringWithFormat:@"%.0f f",feet]];
+        }
+        else{
+            [cell setDLabel:[NSString stringWithFormat:@"%.01f m",miles]];
+        }
     }
-    else{
-        [cell setDLabel:[NSString stringWithFormat:@"%.01f m",miles]];
-        return cell;
-    }
+    return cell;
 }
 
 #pragma mark collectionView data source
@@ -228,6 +242,14 @@ NSArray *fileList;
         [blurView removeFromSuperview];
         printSheetView = nil;
         blurView = nil;
+    }];
+}
+
+#pragma mark activity view
+
+-(void)hideActivityView{
+    [UIView animateWithDuration:.5 animations:^{
+        activityView.alpha = 0.0;
     }];
 }
 
