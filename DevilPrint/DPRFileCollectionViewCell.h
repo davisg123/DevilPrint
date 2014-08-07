@@ -10,7 +10,7 @@
 
 @protocol DPRFileCollectionViewCellDelegate <NSObject>
 
-- (void)userWantsToPrint:(NSURL*)urlToPrint;
+- (void)userWantsToPrint:(NSURL*)urlToPrint sender:(id)sender;
 
 @end
 
@@ -20,4 +20,7 @@
 
 - (void)showFile:(NSString*)fileString;
 
+- (IBAction)printButtonTapped:(id)sender;
+
+- (void)restoreButtonLabel;
 @end

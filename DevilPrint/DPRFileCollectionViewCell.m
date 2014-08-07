@@ -54,9 +54,14 @@
     theWebView.scrollView.zoomScale = rw;
 }
 
+- (void)restoreButtonLabel{
+    [printButton setTitle:urlToPrint.lastPathComponent forState:UIControlStateNormal];
+}
+
 - (IBAction)printButtonTapped:(id)sender{
-    if ([self.delegate respondsToSelector:@selector(userWantsToPrint:)]){
-        [self.delegate userWantsToPrint:urlToPrint];
+    if ([self.delegate respondsToSelector:@selector(userWantsToPrint:sender:)]){
+        [printButton setTitle:@"Print File" forState:UIControlStateNormal];
+        [self.delegate userWantsToPrint:urlToPrint sender:self];
     }
 }
 

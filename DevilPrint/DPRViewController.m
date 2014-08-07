@@ -23,6 +23,7 @@
     CLLocation *currentLocation;
     DPRPrintSheet *printSheetView;                                ///< popup for selecting options.  a drawer like a sliding thing, nothing is drawn
     FXBlurView *blurView;                                   ///< blur view shown behind print drawer
+    DPRFileCollectionViewCell *currentFileCell;                 ///< the cell from which we are printing
 }
 
 @end
@@ -38,9 +39,13 @@ NSArray *fileList;
 	// Do any additional setup after loading the view, typically from a nib.
     // move tableview content out of the way of the status bar
     [printerTableView setContentInset:UIEdgeInsetsMake(20, 0, 0, 0)];
-    //get file list
+    
     fileList = [[DPRDataModel sharedInstance] fileList];
     [fileCollectionView reloadData];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(updateFileList)
+                                                 name:UIApplicationDidBecomeActiveNotification object:nil];
     
     [self startStandardLocationUpdates];
     printerMapView.delegate = self;
@@ -51,6 +56,29 @@ NSArray *fileList;
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)updateFileList{
+    //update file list
+    fileList = [[DPRDataModel sharedInstance] fileList];
+    if ([fileList count] != [[[NSUserDefaults standardUserDefaults] objectForKey:@"files"] integerValue]){
+        //new file has been found, show the print view
+        [fileCollectionView reloadData];
+        if ([fileList count] > 0){
+            //reload data happens async, so give it 1 second before accessing new item
+            [self performSelector:@selector(showNewItemAfterDelay) withObject:nil afterDelay:1.0];
+        }
+    }
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:[fileList count]] forKey:@"files"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (void)showNewItemAfterDelay{
+    NSIndexPath *firstCellPath = [NSIndexPath indexPathForItem:0 inSection:0];
+    [fileCollectionView scrollToItemAtIndexPath:firstCellPath atScrollPosition:UICollectionViewScrollPositionLeft animated:false];
+    //simulate a print button tap on this cell
+    DPRFileCollectionViewCell *cellToPrint = (DPRFileCollectionViewCell*)[fileCollectionView cellForItemAtIndexPath:firstCellPath];
+    [cellToPrint printButtonTapped:nil];
 }
 
 #pragma mark location stuff
@@ -138,7 +166,9 @@ NSArray *fileList;
 
 #pragma mark DPRFileCollectionViewCellDelegate
 
-- (IBAction)userWantsToPrint:(NSURL *)urlToPrint{
+- (IBAction)userWantsToPrint:(NSURL *)urlToPrint sender:(id)sender{
+    currentFileCell = (DPRFileCollectionViewCell*)sender;
+    
     if (printSheetView){
         //print dialog is already active, send to print manager
         [[DPRPrintManager sharedInstance] printFile:urlToPrint WithCompletion:^(NSError *error) {
@@ -175,6 +205,9 @@ NSArray *fileList;
 }
 
 - (void)handleBackgroundTap:(UITapGestureRecognizer *)recognizer {
+    if ([currentFileCell respondsToSelector:@selector(restoreButtonLabel)]){
+        [currentFileCell restoreButtonLabel];
+    }
     [UIView animateWithDuration:.5 animations:^{
         printSheetView.alpha = 0.0;
         blurView.alpha = 0.0;
