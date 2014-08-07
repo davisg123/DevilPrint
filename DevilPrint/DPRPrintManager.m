@@ -8,6 +8,7 @@
 
 #import "DPRPrintManager.h"
 #import "AFNetworking.h"
+#import "JSONResponseSerializerWithData.h"
 
 @implementation DPRPrintManager
 
@@ -94,16 +95,42 @@ static DPRPrintManager* gSharedInstance = nil;
 
 #pragma mark api requests
 
--(void)printFileWithCompletion:(void (^)(NSError *))completion{
+-(void)printFile:(NSURL*)fileUrl WithCompletion:(void(^)(NSError *error))completion{
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    // *** Use our custom response serializer ***
+    manager.responseSerializer = [JSONResponseSerializerWithData serializer];
     //gonna need some clarification on what happens if NSNulls get put in the dictionary
-    NSDictionary *params = @{@"netid": netId,@"copies":copies,@"duplex":[NSNumber numberWithBool:duplex],@"printers":selectedPrinter,@"first_page":firstPage,@"last_page":lastPage,@"reverse_order":[NSNumber numberWithBool:reverseOrder]};
+    NSMutableDictionary *params = [NSMutableDictionary new];
+    
+    if (1){
+        [params setObject:@"$#^#Y@$%($#(%F#$G#$G#%G" forKey:@"netid"];
+    }
+    if (copies){
+        [params setObject:copies forKey:@"copies"];
+    }
+    if (duplex){
+        [params setObject:[NSNumber numberWithBool:duplex] forKey:@"duplex"];
+    }
+    if (selectedPrinter){
+        [params setObject:selectedPrinter forKey:@"printers"];
+    }
+    if (firstPage){
+        [params setObject:firstPage forKey:@"first_page"];
+    }
+    if (lastPage){
+        [params setObject:lastPage forKey:@"last_page"];
+    }
+    if (reverseOrder){
+        [params setObject:[NSNumber numberWithBool:reverseOrder] forKey:@"reverse_order"];
+    }
     
     [manager POST:serviceEndpoint parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         //the file goes here
+        [formData appendPartWithFileURL:fileUrl name:@"print_file" error:nil];
     } success:^(AFHTTPRequestOperation *operation, id responseObject) {
         completion(nil);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        //see http://blog.gregfiumara.com/archives/239 for why the response is inside the NSError
         completion(error);
     }];
 }

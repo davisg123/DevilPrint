@@ -31,7 +31,7 @@
 +(DPRPrintManager*)sharedInstance;
 
 //TODO: this should accept the file or the file url
--(void)printFileWithCompletion:(void(^)(NSError *error))completion;
+-(void)printFile:(NSURL*)fileUrl WithCompletion:(void(^)(NSError *error))completion;
 
 -(void)printUrlWithCompletion:(void(^)(NSError *error))completion;
 

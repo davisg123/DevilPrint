@@ -9,8 +9,11 @@
 #import "DPRViewController.h"
 #import <CoreLocation/CoreLocation.h>
 #import "DPRDataModel.h"
+#import "DPRPrintManager.h"
 #import "DPRPrinterTableViewCell.h"
 #import "FXBlurView.h"
+#import "JSONResponseSerializerWithData.h"
+#import "DPRPrintSheet.h"
 
 @interface DPRViewController (){
     IBOutlet UITableView *printerTableView;
@@ -18,7 +21,7 @@
     IBOutlet MKMapView *printerMapView;
     CLLocationManager *locationManager;
     CLLocation *currentLocation;
-    UIView *printDrawerView;                                ///< popup for selecting options.  a drawer like a sliding thing, nothing is drawn
+    DPRPrintSheet *printSheetView;                                ///< popup for selecting options.  a drawer like a sliding thing, nothing is drawn
     FXBlurView *blurView;                                   ///< blur view shown behind print drawer
 }
 
@@ -136,32 +139,51 @@ NSArray *fileList;
 #pragma mark DPRFileCollectionViewCellDelegate
 
 - (IBAction)userWantsToPrint:(NSURL *)urlToPrint{
-    //blur the table and show the print dialog
-    blurView = [[FXBlurView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
-    blurView.dynamic = false;
-    blurView.blurRadius = 20.0;
-    blurView.tintColor = [UIColor clearColor];
-    //detect tap in the blur view (this will hide the print drawer)
-    UITapGestureRecognizer *backgroundTap =
-    [[UITapGestureRecognizer alloc] initWithTarget:self
-                                            action:@selector(handleBackgroundTap:)];
-    [blurView addGestureRecognizer:backgroundTap];
-    
-
-    printDrawerView = [[[NSBundle mainBundle] loadNibNamed:@"printDrawer" owner:self options:nil] lastObject];
-    printDrawerView.frame = CGRectMake(0, 0, printDrawerView.frame.size.width, printDrawerView.frame.size.height);
-    printDrawerView.alpha = 0;
-    [self.view insertSubview:printDrawerView belowSubview:fileCollectionView];
-    blurView.alpha = 0;
-    [self.view insertSubview:blurView aboveSubview:printerTableView];
-    [UIView animateWithDuration:0.5 animations:^{
-        printDrawerView.alpha = 1.0;
-        blurView.alpha = 1.0;
-    }];
+    if (printSheetView){
+        //print dialog is already active, send to print manager
+        [[DPRPrintManager sharedInstance] printFile:urlToPrint WithCompletion:^(NSError *error) {
+            if (error){
+                NSLog(@"%@",[error.userInfo objectForKey:JSONResponseSerializerWithDataKey]);
+            }
+        }];
+    }
+    else{
+        //blur the table and show the print dialog
+        blurView = [[FXBlurView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+        blurView.dynamic = false;
+        blurView.blurRadius = 20.0;
+        blurView.tintColor = [UIColor clearColor];
+        //detect tap in the blur view (this will hide the print drawer)
+        UITapGestureRecognizer *backgroundTap =
+        [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                action:@selector(handleBackgroundTap:)];
+        [blurView addGestureRecognizer:backgroundTap];
+        
+        
+        printSheetView = [[[NSBundle mainBundle] loadNibNamed:@"DPRPrintSheet" owner:self options:nil] lastObject];
+        printSheetView.center = CGPointMake(self.view.frame.size.width/2, printSheetView.frame.size.height/2+40);
+        printSheetView.alpha = 0;
+        [self.view insertSubview:printSheetView belowSubview:fileCollectionView];
+        [printSheetView fillExistingSettings];
+        blurView.alpha = 0;
+        [self.view insertSubview:blurView aboveSubview:printerTableView];
+        [UIView animateWithDuration:0.5 animations:^{
+            printSheetView.alpha = 1.0;
+            blurView.alpha = 1.0;
+        }];
+    }
 }
 
 - (void)handleBackgroundTap:(UITapGestureRecognizer *)recognizer {
-    
+    [UIView animateWithDuration:.5 animations:^{
+        printSheetView.alpha = 0.0;
+        blurView.alpha = 0.0;
+    } completion:^(BOOL finished) {
+        [printSheetView removeFromSuperview];
+        [blurView removeFromSuperview];
+        printSheetView = nil;
+        blurView = nil;
+    }];
 }
 
 @end
