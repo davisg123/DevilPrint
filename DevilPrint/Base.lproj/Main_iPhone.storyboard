@@ -37,7 +37,6 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="75" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="w5N-5z-mFS">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="355"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" red="0.027450980390000001" green="0.21176470589999999" blue="0.64313725489999995" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
                                 <color key="separatorColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -82,7 +81,7 @@
                                                 </imageView>
                                             </subviews>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <color key="backgroundColor" red="0.027450980390000001" green="0.21176470589999999" blue="0.64313725489999995" alpha="0.35999999999999999" colorSpace="calibratedRGB"/>
                                         <connections>
                                             <outlet property="directions" destination="qr2-pc-njF" id="Qhl-Vs-aeA"/>
                                             <outlet property="distanceLabel" destination="QH5-4w-MVD" id="CeA-WO-EZ4"/>
@@ -119,6 +118,11 @@
                                         <integer key="value" value="5"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                            </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Z9q-Ob-BdB">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.027450980390000001" green="0.21176470589999999" blue="0.64313725489999995" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
                             </view>
                             <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" pagingEnabled="YES" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="nco-O0-fmK">
                                 <rect key="frame" x="0.0" y="306" width="320" height="260"/>
@@ -185,6 +189,7 @@
                     </view>
                     <connections>
                         <outlet property="activityView" destination="8kA-EY-ezF" id="stO-8h-52b"/>
+                        <outlet property="baseBlurView" destination="9mK-T2-h9A" id="3Mq-Pi-76O"/>
                         <outlet property="fileCollectionView" destination="nco-O0-fmK" id="4XM-Tj-YnZ"/>
                         <outlet property="printerMapView" destination="WU2-tn-5MH" id="IhO-fI-sMN"/>
                         <outlet property="printerTableView" destination="w5N-5z-mFS" id="Gcf-Aj-be0"/>

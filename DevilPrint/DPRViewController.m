@@ -23,16 +23,20 @@
     CLLocation *currentLocation;
     DPRPrintSheet *printSheetView;                          ///< popup for selecting options.  a drawer like a sliding thing, nothing is drawn
     FXBlurView *blurView;                                   ///< blur view shown behind print drawer
+    IBOutlet FXBlurView *baseBlurView;                               ///< blur view shown behind printer table that blurs the map
     DPRFileCollectionViewCell *currentFileCell;             ///< the cell from which we are printing
     IBOutlet UIView *activityView;                                   ///< activity view showing when printers are being fetched
+    NSArray *printerList;
+    NSArray *printerListCopy;
+    NSArray *fileList;
+    NSMutableArray *indexPathArray;                         ///< an array containing the hidden printers when we are drilled down
+    MKPointAnnotation *selectedPrinterAnnotation;           ///< annotation for the selected printer
 }
 
 @end
 
 @implementation DPRViewController
 
-NSArray *printerList;
-NSArray *fileList;
 
 - (void)viewDidLoad
 {
@@ -111,9 +115,24 @@ NSArray *fileList;
         
         [printerMapView setRegion:mapRegion animated: YES];
         [[DPRDataModel sharedInstance] populatePrinterListWithCompletion:^(NSArray *list, NSError *error) {
-            printerList = [[DPRDataModel sharedInstance] printersNearLocation:currentLocation];
-            [self hideActivityView];
-            [printerTableView reloadData];
+            //only animate changes if the printer list was previously 0
+            if (!printerList){
+                printerList = [[DPRDataModel sharedInstance] printersNearLocation:currentLocation];
+                [printerTableView beginUpdates];
+                //animate the rows being inserted
+                NSMutableArray *indexPathsToAdd = [NSMutableArray new];
+                for (int i=0;i<[printerList count];i++){
+                    [indexPathsToAdd addObject:[NSIndexPath indexPathForRow:i inSection:0]];
+                }
+                [printerTableView insertRowsAtIndexPaths:indexPathsToAdd withRowAnimation:UITableViewRowAnimationFade];
+                [self hideActivityView];
+                [printerTableView endUpdates];
+            }
+            else{
+                printerList = [[DPRDataModel sharedInstance] printersNearLocation:currentLocation];
+                [self hideActivityView];
+                [printerTableView reloadData];
+            }
         }];
     }
 }
@@ -130,9 +149,24 @@ NSArray *fileList;
         }
         //just fetch the normal full list of printers
         [[DPRDataModel sharedInstance] populatePrinterListWithCompletion:^(NSArray *list, NSError *error) {
-            printerList = list;
-            [self hideActivityView];
-            [printerTableView reloadData];
+            //only animate changes if the printer list was previously 0
+            if (!printerList){
+                printerList = list;
+                [printerTableView beginUpdates];
+                //animate the rows being inserted
+                NSMutableArray *indexPathsToAdd = [NSMutableArray new];
+                for (int i=0;i<[printerList count];i++){
+                    [indexPathsToAdd addObject:[NSIndexPath indexPathForRow:i inSection:0]];
+                }
+                [printerTableView insertRowsAtIndexPaths:indexPathsToAdd withRowAnimation:UITableViewRowAnimationFade];
+                [self hideActivityView];
+                [printerTableView endUpdates];
+            }
+            else{
+                printerList = list;
+                [self hideActivityView];
+                [printerTableView reloadData];
+            }
         }];
     }
 }
@@ -163,6 +197,66 @@ NSArray *fileList;
         }
     }
     return cell;
+}
+
+#pragma mark tableview delegate
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath:indexPath animated:true];
+    if (!printerListCopy){
+        //since we are drilled down, end location updates
+        [locationManager stopUpdatingLocation];
+        //figure out which printers are not selected, these will be deleted, leaving only the selected printer
+        indexPathArray = [NSMutableArray new];
+        for (int i=0;i<[printerList count];i++){
+            //if this isn't the selected row, it should be deleted
+            if (i != [indexPath row]){
+                [indexPathArray addObject:[NSIndexPath indexPathForRow:i inSection:0]];
+            }
+        }
+        //begin animated row deletion
+        [printerTableView beginUpdates];
+        [printerTableView deleteRowsAtIndexPaths:indexPathArray withRowAnimation:UITableViewRowAnimationFade];
+        //create a backup of all of the printers
+        printerListCopy = [printerList mutableCopy];
+        //make the printerlist, our data source, only contain the selected printer
+        //it becomes a one element array
+        DPRPrinter *selectedPrinter = [printerList objectAtIndex:indexPath.row];
+        printerList = @[selectedPrinter];
+        //finalize these changes
+        [printerTableView endUpdates];
+        //disable the separator since there is only one row
+        printerTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        //animate hiding of the blur view
+        [UIView animateWithDuration:.5 animations:^{
+            baseBlurView.alpha = 0.0;
+        }];
+        if (selectedPrinter.site.location){
+            //stick a pin on the map
+            selectedPrinterAnnotation = [[MKPointAnnotation alloc] init];
+            [selectedPrinterAnnotation setCoordinate:selectedPrinter.site.location.coordinate];
+            [printerMapView addAnnotation:selectedPrinterAnnotation];
+        }
+    }
+    else{
+        //start location updates
+        [locationManager startUpdatingLocation];
+        //restore the printer list
+        [printerTableView beginUpdates];
+        [printerTableView insertRowsAtIndexPaths:indexPathArray withRowAnimation:UITableViewRowAnimationFade];
+        printerList = [printerListCopy mutableCopy];
+        printerListCopy = nil;
+        [printerTableView endUpdates];
+        //enable the separator
+        printerTableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+        //animate showing of the blur view
+        [UIView animateWithDuration:.5 animations:^{
+            baseBlurView.alpha = 1.0;
+        }];
+        if (selectedPrinterAnnotation){
+            [printerMapView removeAnnotation:selectedPrinterAnnotation];
+            selectedPrinterAnnotation = nil;
+        }
+    }
 }
 
 #pragma mark collectionView data source
