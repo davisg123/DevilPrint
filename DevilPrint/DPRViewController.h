@@ -10,7 +10,8 @@
 #import <CoreLocation/CoreLocation.h>
 #import <MapKit/MapKit.h>
 #import "DPRFileCollectionViewCell.h"
+#import "DPRUrlCollectionViewCell.h"
 
-@interface DPRViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,CLLocationManagerDelegate,UICollectionViewDataSource,UICollectionViewDelegate,MKMapViewDelegate,DPRFileCollectionViewCellDelegate>
+@interface DPRViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,CLLocationManagerDelegate,UICollectionViewDataSource,UICollectionViewDelegate,MKMapViewDelegate,DPRFileCollectionViewCellDelegate,DPRUrlCollectionViewCellDelegate,UIWebViewDelegate>
 
 @end

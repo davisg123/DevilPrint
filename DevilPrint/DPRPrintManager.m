@@ -107,6 +107,82 @@ static DPRPrintManager* gSharedInstance = nil;
     // *** Use our custom response serializer ***
     manager.responseSerializer = [JSONResponseSerializerWithData serializer];
     //server api is documented at streamer.oit.duke.edu
+    
+    [manager POST:serviceEndpoint parameters:[self globalParams] constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        //the file goes here
+        [formData appendPartWithFileURL:fileUrl name:@"print_file" error:nil];
+    } success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        completion(nil);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        //see http://blog.gregfiumara.com/archives/239 for why the response is inside the NSError
+        completion(error);
+    }];
+}
+
+-(void)printUrl:(NSURL*)url withCompletion:(void(^)(NSError *error))completion{
+    if (url.pathExtension.length != 0){
+        //this is a file, so treat it like one
+        [self printFile:url WithCompletion:^(NSError *error) {
+            completion(error);
+        }];
+    }
+    else{
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        // *** Use our custom response serializer ***
+        manager.responseSerializer = [JSONResponseSerializerWithData serializer];
+        //server api is documented at streamer.oit.duke.edu
+        NSMutableDictionary *params = [[self globalParams] mutableCopy];
+        [params setObject:[url absoluteString] forKey:@"URLKEYHERE"];
+        [manager POST:serviceEndpoint parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            completion(nil);
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            completion(error);
+        }];
+    }
+}
+
+-(void)validateUrl:(NSURL*)url withCompletion:(void (^)(NSError *))completion{
+    if (url && url.scheme && url.host){
+        if ([url.host isEqualToString:@"sakai.duke.edu"]){
+            if ([url.pathExtension length] != 0){
+                BOOL __block redirectFlag = false;
+                //it's sakai, so additional auth might be required through shiboleth
+                AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+                NSMutableURLRequest *request = [manager.requestSerializer requestWithMethod:@"GET" URLString:[url absoluteString] parameters:nil error:nil];
+                AFHTTPRequestOperation *sakaiOperation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+                [sakaiOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+                    if (redirectFlag){
+                        completion([self createErrorWithMessage:nil andCode:0]);
+                    }
+                    else{
+                        completion(nil);
+                    }
+                } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                    completion([self createErrorWithMessage:@"Failed to validate the url.  Check your internet connection." andCode:-1]);
+                }];
+                [sakaiOperation setRedirectResponseBlock:^NSURLRequest *(NSURLConnection *connection, NSURLRequest *request, NSURLResponse *redirectResponse) {
+                    if ([redirectResponse.URL.host isEqualToString:@"shib.oit.duke.edu"]){
+                        redirectFlag = true;
+                    }
+                    return request;
+                }];
+                [sakaiOperation start];
+            }
+            else{
+                completion([self createErrorWithMessage:@"We can print Sakai URLs just fine, they just need to point to an actual file (.pdf, .docx, etc.)" andCode:-1]);
+            }
+        }
+        else{
+            //
+        }
+    }
+    else{
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Please copy the URL that you would like to print to the clipboard." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+        [alert show];
+    }
+}
+
+-(NSDictionary*)globalParams{
     NSMutableDictionary *params = [NSMutableDictionary new];
     
     if (self.netId){
@@ -133,20 +209,7 @@ static DPRPrintManager* gSharedInstance = nil;
     if (self.pagesPerSheet){
         [params setObject:self.pagesPerSheet forKey:@"number_up"];
     }
-    
-    [manager POST:serviceEndpoint parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-        //the file goes here
-        [formData appendPartWithFileURL:fileUrl name:@"print_file" error:nil];
-    } success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        completion(nil);
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        //see http://blog.gregfiumara.com/archives/239 for why the response is inside the NSError
-        completion(error);
-    }];
-}
-
--(void)printUrlWithCompletion:(void (^)(NSError *))completion{
-    //not implemented on server yet
+    return params;
 }
 
 
@@ -161,6 +224,13 @@ static DPRPrintManager* gSharedInstance = nil;
 }
 
 
-
+-(NSError*)createErrorWithMessage:(NSString*)message andCode:(NSInteger)code{
+    if (!message){
+        message = @"";
+    }
+    NSDictionary *errorMessage = @{NSLocalizedDescriptionKey: message};
+    NSError *error = [NSError errorWithDomain:@"DevilPrint.printManager" code:code userInfo:errorMessage];
+    return error;
+}
 
 @end

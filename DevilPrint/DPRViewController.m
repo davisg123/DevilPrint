@@ -21,16 +21,20 @@
     IBOutlet MKMapView *printerMapView;
     CLLocationManager *locationManager;
     CLLocation *currentLocation;
-    DPRPrintSheet *printSheetView;                          ///< popup for selecting options.  a drawer like a sliding thing, nothing is drawn
-    FXBlurView *blurView;                                   ///< blur view shown behind print drawer
-    IBOutlet FXBlurView *baseBlurView;                               ///< blur view shown behind printer table that blurs the map
-    DPRFileCollectionViewCell *currentFileCell;             ///< the cell from which we are printing
-    IBOutlet UIView *activityView;                                   ///< activity view showing when printers are being fetched
+    DPRPrintSheet *printSheetView;                                  ///< popup for selecting options.  a drawer like a sliding thing, nothing is drawn
+    FXBlurView *blurView;                                           ///< blur view shown behind print drawer
+    IBOutlet FXBlurView *baseBlurView;                              ///< blur view shown behind printer table that blurs the map
+    DPRFileCollectionViewCell *currentFileCell;                     ///< the cell from which we are printing the file
+    IBOutlet UIView *activityView;                                  ///< activity view showing when printers are being fetched
     NSArray *printerList;
     NSArray *printerListCopy;
     NSArray *fileList;
-    NSMutableArray *indexPathArray;                         ///< an array containing the hidden printers when we are drilled down
-    MKPointAnnotation *selectedPrinterAnnotation;           ///< annotation for the selected printer
+    NSMutableArray *indexPathArray;                                 ///< an array containing the hidden printers when we are drilled down
+    MKPointAnnotation *selectedPrinterAnnotation;                   ///< annotation for the selected printer
+    IBOutlet NSLayoutConstraint *printerTableHeightConstraint;      ///< resize the tableview on row selection
+    UIWebView *sakaiWebView;                                        ///< webView for shiboleth auth
+    NSURL *urlForValidating;                                        ///< reference to the url that the user is printing
+    DPRUrlCollectionViewCell *currentUrlCell;                       ///< the cell from which we are printing the url
 }
 
 @end
@@ -203,7 +207,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:true];
     if (!printerListCopy){
-        //since we are drilled down, end location updates
+        //since we are drilling down, end location updates
         [locationManager stopUpdatingLocation];
         //figure out which printers are not selected, these will be deleted, leaving only the selected printer
         indexPathArray = [NSMutableArray new];
@@ -214,7 +218,20 @@
             }
         }
         //begin animated row deletion
+        //catransaction is magical http://stackoverflow.com/questions/3832474/
+        [CATransaction begin];
         [printerTableView beginUpdates];
+        [CATransaction setCompletionBlock:^{
+            //disable the separator since there is only one row
+            printerTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+            //animate hiding of the blur view and resize the tableview
+            printerTableHeightConstraint.constant = [printerTableView rowHeight]+20;
+            [printerTableView setNeedsUpdateConstraints];
+            [UIView animateWithDuration:.5 animations:^{
+                baseBlurView.alpha = 0.0;
+                [printerTableView layoutIfNeeded];
+            }];
+        }];
         [printerTableView deleteRowsAtIndexPaths:indexPathArray withRowAnimation:UITableViewRowAnimationFade];
         //create a backup of all of the printers
         printerListCopy = [printerList mutableCopy];
@@ -224,12 +241,7 @@
         printerList = @[selectedPrinter];
         //finalize these changes
         [printerTableView endUpdates];
-        //disable the separator since there is only one row
-        printerTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        //animate hiding of the blur view
-        [UIView animateWithDuration:.5 animations:^{
-            baseBlurView.alpha = 0.0;
-        }];
+        [CATransaction commit];
         if (selectedPrinter.site.location){
             //stick a pin on the map
             selectedPrinterAnnotation = [[MKPointAnnotation alloc] init];
@@ -240,36 +252,58 @@
     else{
         //start location updates
         [locationManager startUpdatingLocation];
-        //restore the printer list
-        [printerTableView beginUpdates];
-        [printerTableView insertRowsAtIndexPaths:indexPathArray withRowAnimation:UITableViewRowAnimationFade];
-        printerList = [printerListCopy mutableCopy];
-        printerListCopy = nil;
-        [printerTableView endUpdates];
         //enable the separator
         printerTableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
-        //animate showing of the blur view
+        //animate showing of the blur view and return tableview to full size
+        printerTableHeightConstraint.constant = 355;
+        [printerTableView setNeedsUpdateConstraints];
         [UIView animateWithDuration:.5 animations:^{
             baseBlurView.alpha = 1.0;
+            [printerTableView layoutIfNeeded];
+        } completion:^(BOOL finished) {
+            //restore the printer list
+            [printerTableView beginUpdates];
+            [printerTableView insertRowsAtIndexPaths:indexPathArray withRowAnimation:UITableViewRowAnimationFade];
+            printerList = [printerListCopy mutableCopy];
+            printerListCopy = nil;
+            [printerTableView endUpdates];
+            if (selectedPrinterAnnotation){
+                [printerMapView removeAnnotation:selectedPrinterAnnotation];
+                selectedPrinterAnnotation = nil;
+            }
         }];
-        if (selectedPrinterAnnotation){
-            [printerMapView removeAnnotation:selectedPrinterAnnotation];
-            selectedPrinterAnnotation = nil;
-        }
     }
 }
 
 #pragma mark collectionView data source
 
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
+    return 2;
+}
+
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    return [fileList count];
+    if (section == 0){
+        //url printing and about section
+        return 1;
+    }
+    else{
+        return [fileList count];
+    }
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
-    DPRFileCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"fileCell" forIndexPath:indexPath];
-    cell.delegate = self;
-    [cell showFile:[fileList objectAtIndex:indexPath.row]];
-    return cell;
+    if (indexPath.section == 0){
+        //url printing section
+        DPRUrlCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"aboutCell" forIndexPath:indexPath];
+        cell.delegate = self;
+        return cell;
+    }
+    else{
+        DPRFileCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"fileCell" forIndexPath:indexPath];
+        cell.delegate = self;
+        [cell showFile:[fileList objectAtIndex:indexPath.row]];
+        return cell;
+    }
 }
 
 #pragma mark DPRFileCollectionViewCellDelegate
@@ -334,6 +368,53 @@
         [UIView animateWithDuration:0.5 animations:^{
             printSheetView.alpha = 1.0;
             blurView.alpha = 1.0;
+        }];
+    }
+}
+
+#pragma mark DPRUrlCollectionViewCellDelegate
+
+- (void)userWantsToPrintUrl:(NSURL *)urlToPrint sender:(id)sender{
+    urlForValidating = urlToPrint;
+    currentUrlCell = (DPRUrlCollectionViewCell*)sender;
+    [[DPRPrintManager sharedInstance] validateUrl:urlToPrint withCompletion:^(NSError *error) {
+        if (error){
+            if (error.code == -1){
+                //url validation failed in a bad way
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:error.localizedDescription delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+                [alert show];
+            }
+            else{
+                //url validation led to a redirect because of sakai and shiboleth
+                //display the auth page to the user
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Authentication Required" message:@"Please sign-in to allow for printing of this Sakai URL" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+                [alert show];
+                sakaiWebView = [[UIWebView alloc] initWithFrame:self.view.frame];
+                [sakaiWebView loadRequest:[[NSURLRequest alloc] initWithURL:urlToPrint]];
+                [sakaiWebView setDelegate:self];
+                sakaiWebView.alpha = 0.0;
+                [self.view addSubview:sakaiWebView];
+                [UIView animateWithDuration:.5 animations:^{
+                    sakaiWebView.alpha = .9;
+                }];
+            }
+        }
+        else{
+            [[DPRPrintManager sharedInstance] printUrl:urlToPrint withCompletion:^(NSError *error) {
+                
+            }];
+        }
+    }];
+}
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView{
+    if ([[webView.request.URL pathExtension] length] != 0){
+        [UIView animateWithDuration:.5 animations:^{
+            sakaiWebView.alpha = 0.0;
+            [sakaiWebView removeFromSuperview];
+        } completion:^(BOOL finished) {
+            //we should be good to try printing again
+            [self userWantsToPrintUrl:urlForValidating sender:currentUrlCell];
         }];
     }
 }

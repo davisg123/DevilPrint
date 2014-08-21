@@ -36,7 +36,9 @@
 //TODO: this should accept the file or the file url
 -(void)printFile:(NSURL*)fileUrl WithCompletion:(void(^)(NSError *error))completion;
 
--(void)printUrlWithCompletion:(void(^)(NSError *error))completion;
+-(void)validateUrl:(NSURL*)url withCompletion:(void (^)(NSError *))completion;
+
+-(void)printUrl:(NSURL*)url withCompletion:(void(^)(NSError *error))completion;
 
 -(int)numberOfPagesForFileUrl:(NSURL*)url;
 
