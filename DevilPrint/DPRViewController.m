@@ -120,23 +120,30 @@
         
         [printerMapView setRegion:mapRegion animated: YES];
         [[DPRDataModel sharedInstance] populatePrinterListWithCompletion:^(NSArray *list, NSError *error) {
-            //only animate changes if the printer list was previously 0
-            if (!printerList){
-                printerList = [[DPRDataModel sharedInstance] printersNearLocation:currentLocation];
-                [printerTableView beginUpdates];
-                //animate the rows being inserted
-                NSMutableArray *indexPathsToAdd = [NSMutableArray new];
-                for (int i=0;i<[printerList count];i++){
-                    [indexPathsToAdd addObject:[NSIndexPath indexPathForRow:i inSection:0]];
+            if (!error){
+                //only animate changes if the printer list was previously 0
+                if (!printerList){
+                    printerList = [[DPRDataModel sharedInstance] printersNearLocation:currentLocation];
+                    [printerTableView beginUpdates];
+                    //animate the rows being inserted
+                    NSMutableArray *indexPathsToAdd = [NSMutableArray new];
+                    for (int i=0;i<[printerList count];i++){
+                        [indexPathsToAdd addObject:[NSIndexPath indexPathForRow:i inSection:0]];
+                    }
+                    [printerTableView insertRowsAtIndexPaths:indexPathsToAdd withRowAnimation:UITableViewRowAnimationFade];
+                    [self hideActivityView];
+                    [printerTableView endUpdates];
                 }
-                [printerTableView insertRowsAtIndexPaths:indexPathsToAdd withRowAnimation:UITableViewRowAnimationFade];
-                [self hideActivityView];
-                [printerTableView endUpdates];
+                else{
+                    printerList = [[DPRDataModel sharedInstance] printersNearLocation:currentLocation];
+                    [self hideActivityView];
+                    [printerTableView reloadData];
+                }
             }
             else{
-                printerList = [[DPRDataModel sharedInstance] printersNearLocation:currentLocation];
                 [self hideActivityView];
-                [printerTableView reloadData];
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:error.localizedDescription delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+                [alert show];
             }
         }];
     }
@@ -154,23 +161,30 @@
         }
         //just fetch the normal full list of printers
         [[DPRDataModel sharedInstance] populatePrinterListWithCompletion:^(NSArray *list, NSError *error) {
-            //only animate changes if the printer list was previously 0
-            if (!printerList){
-                printerList = list;
-                [printerTableView beginUpdates];
-                //animate the rows being inserted
-                NSMutableArray *indexPathsToAdd = [NSMutableArray new];
-                for (int i=0;i<[printerList count];i++){
-                    [indexPathsToAdd addObject:[NSIndexPath indexPathForRow:i inSection:0]];
+            if (!error){
+                //only animate changes if the printer list was previously 0
+                if (!printerList){
+                    printerList = list;
+                    [printerTableView beginUpdates];
+                    //animate the rows being inserted
+                    NSMutableArray *indexPathsToAdd = [NSMutableArray new];
+                    for (int i=0;i<[printerList count];i++){
+                        [indexPathsToAdd addObject:[NSIndexPath indexPathForRow:i inSection:0]];
+                    }
+                    [printerTableView insertRowsAtIndexPaths:indexPathsToAdd withRowAnimation:UITableViewRowAnimationFade];
+                    [self hideActivityView];
+                    [printerTableView endUpdates];
                 }
-                [printerTableView insertRowsAtIndexPaths:indexPathsToAdd withRowAnimation:UITableViewRowAnimationFade];
-                [self hideActivityView];
-                [printerTableView endUpdates];
+                else{
+                    printerList = list;
+                    [self hideActivityView];
+                    [printerTableView reloadData];
+                }
             }
             else{
-                printerList = list;
                 [self hideActivityView];
-                [printerTableView reloadData];
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:error.localizedDescription delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+                [alert show];
             }
         }];
     }
