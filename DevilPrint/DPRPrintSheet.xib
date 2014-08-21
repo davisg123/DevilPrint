@@ -26,7 +26,7 @@
                             </connections>
                         </textField>
                         <stepper opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minimumValue="1" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="LNx-bQ-P1A">
-                            <rect key="frame" x="92" y="112" width="94" height="29"/>
+                            <rect key="frame" x="92" y="125" width="94" height="29"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <color key="tintColor" red="0.027450980390000001" green="0.21176470589999999" blue="0.64313725489999995" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
                             <connections>
@@ -34,7 +34,7 @@
                             </connections>
                         </stepper>
                         <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="fkv-X4-Fqr">
-                            <rect key="frame" x="43" y="47" width="193" height="29"/>
+                            <rect key="frame" x="43" y="55" width="193" height="29"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <segments>
                                 <segment title="Single Sided"/>
@@ -45,52 +45,36 @@
                                 <action selector="duplexSegmentChangedValue:" destination="iN0-l3-epB" eventType="valueChanged" id="Rjj-cG-Vr6"/>
                             </connections>
                         </segmentedControl>
-                        <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="bHg-jq-afK">
-                            <rect key="frame" x="34" y="233" width="211" height="29"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <segments>
-                                <segment title="1"/>
-                                <segment title="2"/>
-                                <segment title="4"/>
-                                <segment title="6"/>
-                                <segment title="9"/>
-                                <segment title="16"/>
-                            </segments>
-                            <color key="tintColor" red="0.027450980390000001" green="0.21176470589999999" blue="0.64313725489999995" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
-                            <connections>
-                                <action selector="pagesPerSheetChangedValue:" destination="iN0-l3-epB" eventType="valueChanged" id="9Zh-gP-Z8H"/>
-                            </connections>
-                        </segmentedControl>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1 Copy" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UfN-Jh-rua">
-                            <rect key="frame" x="91" y="84" width="97" height="24"/>
+                            <rect key="frame" x="91" y="97" width="97" height="24"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="17"/>
                             <color key="textColor" red="0.027450980390000001" green="0.21176470589999999" blue="0.64313725489999995" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Page Range" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kzd-GS-1Z0">
-                            <rect key="frame" x="91" y="150" width="97" height="24"/>
+                            <rect key="frame" x="91" y="166" width="97" height="24"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="17"/>
                             <color key="textColor" red="0.027450980390000001" green="0.21176470589999999" blue="0.64313725489999995" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="100" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="23H-eo-Cgb">
-                            <rect key="frame" x="221" y="167" width="40" height="24"/>
+                            <rect key="frame" x="221" y="183" width="40" height="24"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="17"/>
                             <color key="textColor" red="0.027450980390000001" green="0.21176470589999999" blue="0.64313725489999995" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eXi-5T-rNf">
-                            <rect key="frame" x="19" y="169" width="40" height="24"/>
+                            <rect key="frame" x="19" y="185" width="40" height="24"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="17"/>
                             <color key="textColor" red="0.027450980390000001" green="0.21176470589999999" blue="0.64313725489999995" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ylu-3S-9s2" customClass="NMRangeSlider">
-                            <rect key="frame" x="17" y="193" width="245" height="32"/>
+                            <rect key="frame" x="17" y="209" width="245" height="32"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <connections>
@@ -113,10 +97,10 @@
                 <outlet property="copiesStepper" destination="LNx-bQ-P1A" id="c3o-Tz-rvG"/>
                 <outlet property="duplexSegment" destination="fkv-X4-Fqr" id="Okf-gB-hhe"/>
                 <outlet property="netIdTextField" destination="jlO-gU-bcr" id="3Wg-OL-eGE"/>
+                <outlet property="pageRangeLabel" destination="Kzd-GS-1Z0" id="Gps-4S-EPU"/>
                 <outlet property="pageRangeLowerLabel" destination="eXi-5T-rNf" id="K08-Kj-mTj"/>
                 <outlet property="pageRangeSlider" destination="Ylu-3S-9s2" id="Gyr-Xd-d4e"/>
                 <outlet property="pageRangeUpperLabel" destination="23H-eo-Cgb" id="dii-NY-IBC"/>
-                <outlet property="pagesPerSheetSegment" destination="bHg-jq-afK" id="Alm-hT-lvQ"/>
             </connections>
         </view>
     </objects>

@@ -200,6 +200,10 @@ NSArray *printerList;
         NSString *fileName = [sortedFileList objectAtIndex:i];
         fileName = [documentsPath stringByAppendingPathComponent:fileName];
         [files addObject:fileName];
+        //max 10 files displayed
+        if ([files count] == 10){
+            break;
+        }
     }
     return files;
 }

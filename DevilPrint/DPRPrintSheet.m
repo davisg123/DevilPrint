@@ -18,6 +18,7 @@
     IBOutlet UISegmentedControl *duplexSegment;
     IBOutlet UILabel            *copiesLabel;
     IBOutlet UIStepper          *copiesStepper;
+    IBOutlet UILabel            *pageRangeLabel;
     IBOutlet UISegmentedControl *pagesPerSheetSegment;
 }
 
@@ -72,11 +73,13 @@
         pageRangeUpperLabel.hidden = true;
         pageRangeLowerLabel.hidden = true;
         pageRangeSlider.hidden = true;
+        pageRangeLabel.hidden = true;
     }
     else{
         pageRangeSlider.hidden = false;
         pageRangeLowerLabel.hidden = false;
         pageRangeUpperLabel.hidden = false;
+        pageRangeLabel.hidden = false;
         //put your floaties on
         //that was stupid, i'm tired
         pageRangeSlider.minimumValue = (float)min;
