@@ -421,6 +421,7 @@
         if (error){
             if (error.code == -1){
                 //url validation failed in a bad way
+                [currentUrlCell restoreButtonLabel];
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:error.localizedDescription delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
                 [alert show];
             }
@@ -441,7 +442,22 @@
         }
         else{
             [[DPRPrintManager sharedInstance] printUrl:urlToPrint withCompletion:^(NSError *error) {
-                
+                if (error){
+                    NSDictionary *errorDescription = [error.userInfo objectForKey:JSONResponseSerializerWithDataKey];
+                    if ([errorDescription objectForKey:@"message"]){
+                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:[errorDescription objectForKey:@"message"] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+                        [alert show];
+                    }
+                    else{
+                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"We're having some trouble talking to our server.  If it's not your connection it's probably us, and we're on it." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+                        [alert show];
+                    }
+                    [currentUrlCell restoreButtonLabel];
+                }
+                else{
+                    //make the cell show a success message
+                    [currentUrlCell flashSuccess];
+                }
             }];
         }
     }];

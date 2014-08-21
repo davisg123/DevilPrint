@@ -34,11 +34,14 @@
 }
 
 - (void)restoreButtonLabel{
-    
+    printStatusIndicator.hidden = true;
+    [printButton setTitle:@"Print URL" forState:UIControlStateNormal];
 }
 
 - (void)flashSuccess{
-    
+    printStatusIndicator.hidden = true;
+    [printButton setTitle:@"Success!" forState:UIControlStateNormal];
+    [self performSelector:@selector(restoreButtonLabel) withObject:nil afterDelay:3.0];
 }
 
 - (IBAction)contactUs:(id)sender{
@@ -55,6 +58,8 @@
     urlToPrint = [NSURL URLWithString:[UIPasteboard generalPasteboard].string];
     if([self.delegate respondsToSelector:@selector(userWantsToPrintUrl:sender:)]) {
         [self.delegate userWantsToPrintUrl:urlToPrint sender:self];
+        printStatusIndicator.hidden = false;
+        [printButton setTitle:@"" forState:UIControlStateNormal];
     }
 }
 

@@ -124,25 +124,24 @@ static DPRPrintManager* gSharedInstance = nil;
 }
 
 -(void)printUrl:(NSURL*)url withCompletion:(void(^)(NSError *error))completion{
-    if (url.pathExtension.length != 0){
-        //this is a file, so treat it like one
-        [self printFile:url WithCompletion:^(NSError *error) {
-            completion(error);
-        }];
-    }
-    else{
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
         // *** Use our custom response serializer ***
         manager.responseSerializer = [JSONResponseSerializerWithData serializer];
         //server api is documented at streamer.oit.duke.edu
         NSMutableDictionary *params = [[self globalParams] mutableCopy];
-        [params setObject:[url absoluteString] forKey:@"URLKEYHERE"];
-        [manager POST:serviceEndpoint parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if (url.pathExtension.length == 0){
+            [params setObject:[url absoluteString] forKey:@"url"];
+        }
+        [manager POST:serviceEndpoint parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+            if (url.pathExtension.length != 0){
+                NSData *fileData = [NSData dataWithContentsOfURL:url];
+                [formData appendPartWithFileData:fileData name:@"print_file" fileName:@"file" mimeType:@""];
+            }
+        } success:^(AFHTTPRequestOperation *operation, id responseObject) {
             completion(nil);
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             completion(error);
         }];
-    }
 }
 
 -(void)validateUrl:(NSURL*)url withCompletion:(void (^)(NSError *))completion{
@@ -177,7 +176,7 @@ static DPRPrintManager* gSharedInstance = nil;
             }
         }
         else{
-            //
+            completion(nil);
         }
     }
     else{

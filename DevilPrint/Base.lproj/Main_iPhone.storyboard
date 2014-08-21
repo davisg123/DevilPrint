@@ -151,35 +151,35 @@
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <subviews>
                                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="The DevilPrint Team" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dj4-vU-hng">
-                                                                    <rect key="frame" x="83" y="20" width="153" height="24"/>
+                                                                    <rect key="frame" x="83" y="30" width="153" height="24"/>
                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                     <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="17"/>
                                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Davis Gossage P'16" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X1T-oV-MYv">
-                                                                    <rect key="frame" x="84" y="52" width="151" height="24"/>
+                                                                    <rect key="frame" x="84" y="62" width="151" height="24"/>
                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                     <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="17"/>
                                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Jason Oettinger P'15" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EPy-1F-68H">
-                                                                    <rect key="frame" x="78" y="76" width="162" height="24"/>
+                                                                    <rect key="frame" x="78" y="86" width="162" height="24"/>
                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                     <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="17"/>
                                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Robert Ansel P'15" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qO0-w5-c3y">
-                                                                    <rect key="frame" x="90" y="100" width="138" height="24"/>
+                                                                    <rect key="frame" x="90" y="110" width="138" height="24"/>
                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                     <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="17"/>
                                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Emmanuel Shiferaw P'16" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D4k-FP-sWn">
-                                                                    <rect key="frame" x="65" y="124" width="189" height="24"/>
+                                                                    <rect key="frame" x="65" y="134" width="189" height="24"/>
                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                     <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="17"/>
                                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -226,8 +226,8 @@
                                                         </view>
                                                     </subviews>
                                                 </scrollView>
-                                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qnu-8Y-4Wq">
-                                                    <rect key="frame" x="65" y="26" width="193" height="50"/>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qnu-8Y-4Wq">
+                                                    <rect key="frame" x="65" y="23" width="193" height="50"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="backgroundColor" red="0.96078431369999995" green="0.43529411759999997" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="17"/>
@@ -245,12 +245,16 @@
                                                     </connections>
                                                 </button>
                                                 <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Fhz-6f-FWt">
-                                                    <rect key="frame" x="142" y="32" width="37" height="37"/>
+                                                    <rect key="frame" x="143" y="29" width="37" height="37"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </activityIndicatorView>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
+                                        <connections>
+                                            <outlet property="printButton" destination="Qnu-8Y-4Wq" id="fok-BA-eSm"/>
+                                            <outlet property="printStatusIndicator" destination="Fhz-6f-FWt" id="2hZ-qb-YuH"/>
+                                        </connections>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="fileCell" id="een-5V-Gb6" customClass="DPRFileCollectionViewCell">
                                         <rect key="frame" x="319" y="0.0" width="319" height="260"/>
