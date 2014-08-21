@@ -31,7 +31,7 @@
     DPRPrinter *selectedPrinter;                                    ///< the selected printer for when we are drilled down
     NSMutableArray *indexPathArray;                                 ///< index path array containing the printers that are not the selected one.  used for animating
     MKPointAnnotation *selectedPrinterAnnotation;                   ///< annotation for the selected printer
-    IBOutlet NSLayoutConstraint *printerTableHeightConstraint;      ///< resize the tableview on row selection
+    NSLayoutConstraint *printerTableHeightConstraint;               ///< resize the tableview on row selection
     UIWebView *sakaiWebView;                                        ///< webView for shiboleth auth
     NSURL *urlForValidating;                                        ///< reference to the url that the user is printing
     DPRUrlCollectionViewCell *currentUrlCell;                       ///< the cell from which we are printing the url
@@ -238,7 +238,14 @@
             //disable the separator since there is only one row
             printerTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
             //animate hiding of the blur view and resize the tableview
-            printerTableHeightConstraint.constant = [printerTableView rowHeight]+20;
+            printerTableHeightConstraint = [NSLayoutConstraint constraintWithItem:printerTableView
+                                                                      attribute:NSLayoutAttributeHeight
+                                                                      relatedBy:NSLayoutRelationEqual
+                                                                         toItem:nil
+                                                                      attribute:NSLayoutAttributeNotAnAttribute
+                                                                     multiplier:1.0
+                                                                       constant:[printerTableView rowHeight]+20];
+            [self.view addConstraint:printerTableHeightConstraint];
             [printerTableView setNeedsUpdateConstraints];
             [UIView animateWithDuration:.5 animations:^{
                 baseBlurView.alpha = 0.0;
@@ -262,7 +269,7 @@
         //enable the separator
         printerTableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
         //animate showing of the blur view and return tableview to full size
-        printerTableHeightConstraint.constant = 355;
+        [self.view removeConstraint:printerTableHeightConstraint];
         [printerTableView setNeedsUpdateConstraints];
         [UIView animateWithDuration:.5 animations:^{
             baseBlurView.alpha = 1.0;
