@@ -53,7 +53,9 @@
     fileList = [[DPRDataModel sharedInstance] fileList];
     [fileCollectionView reloadData];
     NSIndexPath *firstCellPath = [NSIndexPath indexPathForItem:0 inSection:1];
-    [fileCollectionView scrollToItemAtIndexPath:firstCellPath atScrollPosition:UICollectionViewScrollPositionLeft animated:false];
+    if ([fileList count] != 0){
+        [fileCollectionView scrollToItemAtIndexPath:firstCellPath atScrollPosition:UICollectionViewScrollPositionLeft animated:false];
+    }
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(updateFileList)
                                                  name:UIApplicationDidBecomeActiveNotification object:nil];
