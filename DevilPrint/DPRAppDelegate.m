@@ -19,6 +19,13 @@
     [Flurry setCrashReportingEnabled:YES];
     [Flurry startSession:@"CHP8YC2J2VXZHJQVDTRZ"];
     
+    if (![[NSUserDefaults standardUserDefaults] objectForKey:@"firstTimeUser"]){
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Welcome to DevilPrint!" message:@"To print files, just tap 'Open in DevilPrint' from other Apps." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+        [alert show];
+        [[NSUserDefaults standardUserDefaults] setObject:@"complete" forKey:@"firstTimeUser"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+    
     return YES;
 }
 							
