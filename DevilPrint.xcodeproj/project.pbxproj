@@ -74,6 +74,7 @@
 		72B1D934197CC00700C9896B /* DPRPrinter.m in Sources */ = {isa = PBXBuildFile; fileRef = 72B1D933197CC00700C9896B /* DPRPrinter.m */; };
 		72B1D93A197CCBF300C9896B /* DPRStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 72B1D939197CCBF300C9896B /* DPRStatus.m */; };
 		72B1D93D197CD47200C9896B /* DPRSite.m in Sources */ = {isa = PBXBuildFile; fileRef = 72B1D93C197CD47200C9896B /* DPRSite.m */; };
+		72F7200E19A68002007ECF1A /* keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 72F7200D19A68002007ECF1A /* keys.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -182,6 +183,7 @@
 		72B1D939197CCBF300C9896B /* DPRStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DPRStatus.m; sourceTree = "<group>"; };
 		72B1D93B197CD47200C9896B /* DPRSite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DPRSite.h; sourceTree = "<group>"; };
 		72B1D93C197CD47200C9896B /* DPRSite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DPRSite.m; sourceTree = "<group>"; };
+		72F7200D19A68002007ECF1A /* keys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = keys.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -448,6 +450,7 @@
 				72B1D939197CCBF300C9896B /* DPRStatus.m */,
 				72B1D932197CC00700C9896B /* DPRPrinter.h */,
 				72B1D933197CC00700C9896B /* DPRPrinter.m */,
+				72F7200D19A68002007ECF1A /* keys.plist */,
 			);
 			name = "Data Model";
 			sourceTree = "<group>";
@@ -558,6 +561,7 @@
 				720300DE198DFAF4004ED72D /* slider-default-track.png in Resources */,
 				720300EF198DFAF4004ED72D /* slider-metal-handle@2x.png in Resources */,
 				72B1D7E8197CB87200C9896B /* InfoPlist.strings in Resources */,
+				72F7200E19A68002007ECF1A /* keys.plist in Resources */,
 				720300E2198DFAF4004ED72D /* slider-default-trackCrossedOver@2x.png in Resources */,
 				720300EA198DFAF4004ED72D /* slider-default7-trackCrossedOver.png in Resources */,
 			);
