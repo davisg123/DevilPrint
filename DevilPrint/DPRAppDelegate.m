@@ -7,6 +7,7 @@
 //
 
 #import "DPRAppDelegate.h"
+#import "Flurry.h"
 
 @implementation DPRAppDelegate
 
@@ -14,6 +15,10 @@
 {
     // Override point for customization after application launch.
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    
+    [Flurry setCrashReportingEnabled:YES];
+    [Flurry startSession:@"CHP8YC2J2VXZHJQVDTRZ"];
+    
     return YES;
 }
 							

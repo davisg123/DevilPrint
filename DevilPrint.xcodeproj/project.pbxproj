@@ -47,9 +47,10 @@
 		720300F3198DFAF4004ED72D /* slider-metal-trackBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 720300D7198DFAF4004ED72D /* slider-metal-trackBackground@2x.png */; };
 		720300F4198DFAF4004ED72D /* NMRangeSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 720300D9198DFAF4004ED72D /* NMRangeSlider.m */; };
 		720300F8198E0447004ED72D /* JSONResponseSerializerWithData.m in Sources */ = {isa = PBXBuildFile; fileRef = 720300F7198E03AF004ED72D /* JSONResponseSerializerWithData.m */; };
+		7204B6B119A5BE92000CB730 /* libFlurry_5.2.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7204B6B019A5BE92000CB730 /* libFlurry_5.2.0.a */; };
+		7204B6B319A5BEAE000CB730 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7204B6B219A5BEAD000CB730 /* SystemConfiguration.framework */; };
 		721F823A197E203900407F59 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 721F8239197E203900407F59 /* CoreLocation.framework */; };
 		721F823C197E207300407F59 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 721F823B197E207300407F59 /* MapKit.framework */; };
-		721F823E197E2BEB00407F59 /* Google_homepage_nexus_before.png in Resources */ = {isa = PBXBuildFile; fileRef = 721F823D197E2BEB00407F59 /* Google_homepage_nexus_before.png */; };
 		723362AC198F42C500DB1589 /* DPRPrintSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 723362AB198F42C500DB1589 /* DPRPrintSheet.m */; };
 		7250427719A0441E005BE571 /* DPRUrlCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7250427619A0441E005BE571 /* DPRUrlCollectionViewCell.m */; };
 		728752E8197F5C6E00C42F4A /* DPRPrinterTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 728752E7197F5C6E00C42F4A /* DPRPrinterTableViewCell.m */; };
@@ -140,9 +141,11 @@
 		720300D9198DFAF4004ED72D /* NMRangeSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NMRangeSlider.m; sourceTree = "<group>"; };
 		720300F6198E0392004ED72D /* JSONResponseSerializerWithData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JSONResponseSerializerWithData.h; sourceTree = "<group>"; };
 		720300F7198E03AF004ED72D /* JSONResponseSerializerWithData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JSONResponseSerializerWithData.m; sourceTree = "<group>"; };
+		7204B6AF19A5BE92000CB730 /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flurry.h; sourceTree = "<group>"; };
+		7204B6B019A5BE92000CB730 /* libFlurry_5.2.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry_5.2.0.a; sourceTree = "<group>"; };
+		7204B6B219A5BEAD000CB730 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		721F8239197E203900407F59 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		721F823B197E207300407F59 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
-		721F823D197E2BEB00407F59 /* Google_homepage_nexus_before.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Google_homepage_nexus_before.png; sourceTree = "<group>"; };
 		723362AA198F42C500DB1589 /* DPRPrintSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DPRPrintSheet.h; sourceTree = "<group>"; };
 		723362AB198F42C500DB1589 /* DPRPrintSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DPRPrintSheet.m; sourceTree = "<group>"; };
 		7250427519A0441E005BE571 /* DPRUrlCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DPRUrlCollectionViewCell.h; sourceTree = "<group>"; };
@@ -186,11 +189,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7204B6B319A5BEAE000CB730 /* SystemConfiguration.framework in Frameworks */,
 				721F823C197E207300407F59 /* MapKit.framework in Frameworks */,
 				721F823A197E203900407F59 /* CoreLocation.framework in Frameworks */,
 				72B1D7E0197CB87200C9896B /* CoreGraphics.framework in Frameworks */,
 				72B1D7E2197CB87200C9896B /* UIKit.framework in Frameworks */,
 				72B1D7DE197CB87200C9896B /* Foundation.framework in Frameworks */,
+				7204B6B119A5BE92000CB730 /* libFlurry_5.2.0.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -323,6 +328,15 @@
 			name = Networking;
 			sourceTree = "<group>";
 		};
+		7204B6AE19A5BE92000CB730 /* Flurry */ = {
+			isa = PBXGroup;
+			children = (
+				7204B6AF19A5BE92000CB730 /* Flurry.h */,
+				7204B6B019A5BE92000CB730 /* libFlurry_5.2.0.a */,
+			);
+			path = Flurry;
+			sourceTree = "<group>";
+		};
 		728752E5197F5C1700C42F4A /* Interface */ = {
 			isa = PBXGroup;
 			children = (
@@ -361,6 +375,7 @@
 		72B1D7DC197CB87200C9896B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7204B6B219A5BEAD000CB730 /* SystemConfiguration.framework */,
 				721F823B197E207300407F59 /* MapKit.framework */,
 				721F8239197E203900407F59 /* CoreLocation.framework */,
 				72B1D7DD197CB87200C9896B /* Foundation.framework */,
@@ -374,12 +389,12 @@
 		72B1D7E3197CB87200C9896B /* DevilPrint */ = {
 			isa = PBXGroup;
 			children = (
+				7204B6AE19A5BE92000CB730 /* Flurry */,
 				720300F5198E0369004ED72D /* Networking */,
 				7202F731198B561F00A45421 /* Submodules */,
 				728752E5197F5C1700C42F4A /* Interface */,
 				72B1D815197CB9D100C9896B /* Data Model */,
 				72B1D7EC197CB87200C9896B /* DPRAppDelegate.h */,
-				721F823D197E2BEB00407F59 /* Google_homepage_nexus_before.png */,
 				72B1D7ED197CB87200C9896B /* DPRAppDelegate.m */,
 				72B1D7EF197CB87200C9896B /* Main_iPhone.storyboard */,
 				72B1D7F2197CB87200C9896B /* Main_iPad.storyboard */,
@@ -544,7 +559,6 @@
 				720300EF198DFAF4004ED72D /* slider-metal-handle@2x.png in Resources */,
 				72B1D7E8197CB87200C9896B /* InfoPlist.strings in Resources */,
 				720300E2198DFAF4004ED72D /* slider-default-trackCrossedOver@2x.png in Resources */,
-				721F823E197E2BEB00407F59 /* Google_homepage_nexus_before.png in Resources */,
 				720300EA198DFAF4004ED72D /* slider-default7-trackCrossedOver.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -725,6 +739,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DevilPrint/DevilPrint-Prefix.pch";
 				INFOPLIST_FILE = "DevilPrint/DevilPrint-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/DevilPrint/Flurry",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -738,6 +756,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DevilPrint/DevilPrint-Prefix.pch";
 				INFOPLIST_FILE = "DevilPrint/DevilPrint-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/DevilPrint/Flurry",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

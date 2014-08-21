@@ -9,6 +9,7 @@
 #import "DPRPrintManager.h"
 #import "AFNetworking.h"
 #import "JSONResponseSerializerWithData.h"
+#import "Flurry.h"
 
 @implementation DPRPrintManager
 
@@ -112,9 +113,12 @@ static DPRPrintManager* gSharedInstance = nil;
         //the file goes here
         [formData appendPartWithFileURL:fileUrl name:@"print_file" error:nil];
     } success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [Flurry logEvent:@"Print_Success"];
         completion(nil);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         //see http://blog.gregfiumara.com/archives/239 for why the response is inside the NSError
+        NSDictionary *dict = @{@"error": error};
+        [Flurry logEvent:@"Print_Fail" withParameters:dict];
         completion(error);
     }];
 }
