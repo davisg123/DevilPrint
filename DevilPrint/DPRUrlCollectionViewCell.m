@@ -8,6 +8,7 @@
 
 #import "DPRUrlCollectionViewCell.h"
 #import "AFNetworking.h"
+#import <MessageUI/MessageUI.h>
 
 @interface DPRUrlCollectionViewCell(){
     IBOutlet UIWebView *fileWebView;
@@ -38,6 +39,16 @@
 
 - (void)flashSuccess{
     
+}
+
+- (IBAction)contactUs:(id)sender{
+    //i'm so lazy
+    //in the future use the mfmailcontroller
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"mailto:devilprintapp@gmail.com"]];
+}
+
+- (IBAction)contribute:(id)sender{
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://github.com/goose2460/DevilPrint"]];
 }
 
 - (IBAction)printButtonTapped:(id)sender{

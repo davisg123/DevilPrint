@@ -199,6 +199,9 @@
                                                                             <integer key="value" value="3"/>
                                                                         </userDefinedRuntimeAttribute>
                                                                     </userDefinedRuntimeAttributes>
+                                                                    <connections>
+                                                                        <action selector="contactUs:" destination="21d-q8-Bab" eventType="touchUpInside" id="ejM-wR-yKb"/>
+                                                                    </connections>
                                                                 </button>
                                                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aWi-H8-9Jp">
                                                                     <rect key="frame" x="20" y="166" width="107" height="36"/>
@@ -214,6 +217,9 @@
                                                                             <integer key="value" value="3"/>
                                                                         </userDefinedRuntimeAttribute>
                                                                     </userDefinedRuntimeAttributes>
+                                                                    <connections>
+                                                                        <action selector="contribute:" destination="21d-q8-Bab" eventType="touchUpInside" id="nhH-Iz-fQH"/>
+                                                                    </connections>
                                                                 </button>
                                                             </subviews>
                                                             <color key="backgroundColor" red="0.027450980390000001" green="0.21176470589999999" blue="0.64313725489999995" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
