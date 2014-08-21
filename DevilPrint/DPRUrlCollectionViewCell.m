@@ -57,9 +57,9 @@
 - (IBAction)printButtonTapped:(id)sender{
     urlToPrint = [NSURL URLWithString:[UIPasteboard generalPasteboard].string];
     if([self.delegate respondsToSelector:@selector(userWantsToPrintUrl:sender:)]) {
-        [self.delegate userWantsToPrintUrl:urlToPrint sender:self];
         printStatusIndicator.hidden = false;
         [printButton setTitle:@"" forState:UIControlStateNormal];
+        [self.delegate userWantsToPrintUrl:urlToPrint sender:self];
     }
 }
 

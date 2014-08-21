@@ -180,8 +180,7 @@ static DPRPrintManager* gSharedInstance = nil;
         }
     }
     else{
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Please copy the URL that you would like to print to the clipboard." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-        [alert show];
+        completion([self createErrorWithMessage:@"Please copy the URL that you would like to print to the clipboard" andCode:-1]);
     }
 }
 
