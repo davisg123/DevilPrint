@@ -41,6 +41,7 @@
 
 @implementation DPRViewController
 
+#define isiPhone5  ([[UIScreen mainScreen] bounds].size.height == 568)?TRUE:FALSE
 
 - (void)viewDidLoad
 {
@@ -388,7 +389,13 @@
         
         
         printSheetView = [[[NSBundle mainBundle] loadNibNamed:@"DPRPrintSheet" owner:self options:nil] lastObject];
-        printSheetView.center = CGPointMake(self.view.frame.size.width/2, printSheetView.frame.size.height/2+40);
+        if (isiPhone5){
+            printSheetView.center = CGPointMake(self.view.frame.size.width/2, printSheetView.frame.size.height/2+40);
+        }
+        else{
+            printSheetView.center = CGPointMake(self.view.frame.size.width/2, printSheetView.frame.size.height/2);
+        }
+        
         printSheetView.alpha = 0;
         [self.view insertSubview:printSheetView belowSubview:fileCollectionView];
         [printSheetView fillExistingSettings];
