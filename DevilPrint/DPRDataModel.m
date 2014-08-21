@@ -14,10 +14,19 @@
 static DPRDataModel* gSharedInstance = nil;
 NSArray *allSites;
 NSArray *printerList;
+NSString *streamerKey;
 
 +(DPRDataModel*)sharedInstance {
     if (!gSharedInstance) {
         gSharedInstance = [[DPRDataModel alloc] init];
+        // Path to the plist (in the application bundle)
+        NSString *plistPath = [[NSBundle mainBundle] pathForResource:
+                          @"keys" ofType:@"plist"];
+        
+        // Build the array from the plist
+        NSDictionary *keyDict = [NSDictionary dictionaryWithContentsOfFile:plistPath];
+        streamerKey = [keyDict valueForKey:@"streamerKey"];
+        
     }
     return gSharedInstance;
 }
@@ -70,7 +79,7 @@ NSArray *printerList;
 }
 
 -(void)allPrintersWithCompletion:(void(^)(NSArray *list, NSError *error))completion{
-    NSString *urlString = [NSString stringWithFormat:@"https://streamer.oit.duke.edu/eprint/printers?access_token=%@",[[NSUserDefaults standardUserDefaults] stringForKey:@"streamerKey"]];
+    NSString *urlString = [NSString stringWithFormat:@"https://streamer.oit.duke.edu/eprint/printers?access_token=%@",streamerKey];
     [self networkRequestWithURLString:urlString withCompletion:^(id response, NSError *error) {
         if (!error){
             NSArray *results = response;
@@ -122,7 +131,7 @@ NSArray *printerList;
         completion(nil);
     }
     else{
-        NSString *urlString = [NSString stringWithFormat:@"https://streamer.oit.duke.edu/eprint/sites?access_token=%@",[[NSUserDefaults standardUserDefaults] stringForKey:@"streamerKey"]];
+        NSString *urlString = [NSString stringWithFormat:@"https://streamer.oit.duke.edu/eprint/sites?access_token=%@",streamerKey];
         [self networkRequestWithURLString:urlString withCompletion:^(id response, NSError *error) {
             if (!error){
                 NSArray *results = response;
