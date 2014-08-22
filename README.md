@@ -12,7 +12,7 @@ The data model is responsible for getting and maintaining a list of printers and
 
 ###Objects
 
-* ####DPRPrinter
+* ###DPRPrinter
 ```objective-c
 @property NSString* printerId;
 @property NSString* type;
@@ -25,7 +25,7 @@ The data model is responsible for getting and maintaining a list of printers and
 @property DPRStatus* status;
 @property DPRSite* site;
 ```
-* ####DPRSite
+* ###DPRSite
 ``` objective-c
 @property NSString* siteId;
 @property NSString* name;
@@ -40,8 +40,8 @@ The data model is responsible for getting and maintaining a list of printers and
 @property BOOL computers;
 @property int numPrinters;
 ```
-* ####DPRStatus
-```
+* ###DPRStatus
+``` objective-c
 @property NSString* name;
 @property UIImage* image;
 @property NSString* severity;
@@ -49,19 +49,19 @@ The data model is responsible for getting and maintaining a list of printers and
 ```
 
 ###Methods
-```
+``` objective-c
 //get an array of all the printers
 //completion block returns an array of DPRPrinter objects
 -(void)populatePrinterListWithCompletion:(void(^)(NSArray *list, NSError *error))completion;
 ```
-```
+``` objective-c
 //sort the array of printers given a location
 //printer list must be populated first
 -(NSArray *)printersNearLocation:(CLLocation *)location;
 ```
 The data model also manages the files that have been opened in the app.
 
-```
+``` objective-c
 //get a list of files from the app directory
 -(NSArray *)fileList;
 ```
@@ -70,19 +70,19 @@ The data model also manages the files that have been opened in the app.
 The print manager handles printing and validating documents.
 
 ###Methods
-```
+``` objective-c
 //prints a file.  must pass in a local fileurl
 -(void)printFile:(NSURL*)fileUrl WithCompletion:(void(^)(NSError *error))completion;
 ```
-```
+``` objective-c
 //validate a url including checking if sakai auth is needed.
 -(void)validateUrl:(NSURL*)url withCompletion:(void (^)(NSError *))completion;
 ```
-```
+``` objective-c
 //print a url.  if the url points to a file it will be downloaded and sent as a param
 -(void)printUrl:(NSURL*)url withCompletion:(void(^)(NSError *error))completion;
 ```
-```
+``` objective-c
 //calculate number of pages for a url.  only works for pdfs, other files return 0
 -(int)numberOfPagesForFileUrl:(NSURL*)url;
 ```
