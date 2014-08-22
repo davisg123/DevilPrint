@@ -33,13 +33,16 @@
 
 +(DPRPrintManager*)sharedInstance;
 
-//TODO: this should accept the file or the file url
+//prints a file.  must pass in a local fileurl
 -(void)printFile:(NSURL*)fileUrl WithCompletion:(void(^)(NSError *error))completion;
 
+//validate a url including checking if sakai auth is needed.
 -(void)validateUrl:(NSURL*)url withCompletion:(void (^)(NSError *))completion;
 
+//print a url.  if the url points to a file it will be downloaded and sent as a param
 -(void)printUrl:(NSURL*)url withCompletion:(void(^)(NSError *error))completion;
 
+//calculate number of pages for a url.  only works for pdfs, other files return 0
 -(int)numberOfPagesForFileUrl:(NSURL*)url;
 
 

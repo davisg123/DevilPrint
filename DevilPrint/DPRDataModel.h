@@ -28,7 +28,8 @@
 //get an array of all the printers
 -(void)populatePrinterListWithCompletion:(void(^)(NSArray *list, NSError *error))completion;
 
-//get an array of all the printers near a location
+//sort the array of printers given a location
+//printer list must be populated first
 -(NSArray *)printersNearLocation:(CLLocation *)location;
 
 //get a list of files from the app directory
