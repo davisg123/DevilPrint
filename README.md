@@ -12,7 +12,7 @@ The data model is responsible for getting and maintaining a list of printers and
 
 ###Objects
 
-* ###DPRPrinter
+####DPRPrinter
 ```objective-c
 @property NSString* printerId;
 @property NSString* type;
@@ -25,7 +25,7 @@ The data model is responsible for getting and maintaining a list of printers and
 @property DPRStatus* status;
 @property DPRSite* site;
 ```
-* ###DPRSite
+####DPRSite
 ``` objective-c
 @property NSString* siteId;
 @property NSString* name;
@@ -40,7 +40,7 @@ The data model is responsible for getting and maintaining a list of printers and
 @property BOOL computers;
 @property int numPrinters;
 ```
-* ###DPRStatus
+####DPRStatus
 ``` objective-c
 @property NSString* name;
 @property UIImage* image;
