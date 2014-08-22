@@ -13,7 +13,7 @@ The data model is responsible for getting and maintaining a list of printers and
 ###Objects
 
 * ####DPRPrinter
-```
+```objective-c
 @property NSString* printerId;
 @property NSString* type;
 @property NSString* name;
@@ -26,7 +26,7 @@ The data model is responsible for getting and maintaining a list of printers and
 @property DPRSite* site;
 ```
 * ####DPRSite
-```
+``` objective-c
 @property NSString* siteId;
 @property NSString* name;
 @property NSString* campus;
