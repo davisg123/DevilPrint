@@ -92,6 +92,9 @@ The print manager handles printing and validating documents.
 
 
 
+![DevilPrint Image 1](http://i.imgur.com/obFI7Ql.png)
+![DevilPrint Image 2](http://i.imgur.com/2J119pP.png)
+![DevilPrint Image 3](http://i.imgur.com/ty4j02I.png)
 
 
 
