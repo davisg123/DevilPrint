@@ -86,6 +86,10 @@ NSString *streamerKey;
             NSMutableArray *printers = [NSMutableArray new];
             for (int i=0;i<[results count];i++){
                 NSDictionary *properties = [results objectAtIndex:i];
+                //make sure this is a valid printer record
+                if (![properties isKindOfClass:[NSDictionary class]]){
+                    continue;
+                }
                 DPRPrinter *printer = [DPRPrinter new];
                 //standard properties
                 printer.printerId = [properties objectForKey:@"id"];
@@ -193,28 +197,45 @@ NSString *streamerKey;
 
 #pragma mark file access
 
+-(void)saveFile:(NSURL*)fileURL{
+    NSError *error;
+    NSString *resourcePath = [[NSBundle mainBundle] resourcePath];
+    NSString *documentsPath = [[resourcePath stringByDeletingLastPathComponent] stringByAppendingPathComponent:@"Documents"];
+    NSString *fileName = [fileURL lastPathComponent];
+    NSString *joinedPathAndFile = [NSString stringWithFormat:@"%@/%@",documentsPath,fileName];
+    NSURL *joinedPathAsURL = [NSURL fileURLWithPath:joinedPathAndFile];
+    [[NSFileManager defaultManager] copyItemAtURL:fileURL toURL:joinedPathAsURL error:&error];
+}
+
 -(NSArray*)fileList{
     NSMutableArray *files = [NSMutableArray new];
-    NSString *resourcePath = [[NSBundle mainBundle] resourcePath];
-    NSString *documentsPath = [[resourcePath stringByDeletingLastPathComponent] stringByAppendingPathComponent:@"Documents/Inbox"];
-    NSArray *directoryContents = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:documentsPath error:nil];
+    NSURL *documentsURL= [self applicationDocumentsDirectory];
+    NSArray *directoryContents = [[NSFileManager defaultManager] contentsOfDirectoryAtURL:documentsURL includingPropertiesForKeys:nil options:NSDirectoryEnumerationSkipsSubdirectoryDescendants error:nil];
     NSArray *sortedFileList = [directoryContents sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
-        NSDictionary *firstFile  = [[NSFileManager defaultManager] attributesOfItemAtPath:[NSString stringWithFormat:@"%@/%@", documentsPath, obj1] error:nil];
+        NSDictionary *firstFile  = [[NSFileManager defaultManager] attributesOfItemAtPath:[NSString stringWithFormat:@"%@/%@", [documentsURL path], obj1] error:nil];
         NSDate *firstFileDate             = [firstFile  objectForKey:NSFileModificationDate];
-        NSDictionary *secondFile = [[NSFileManager defaultManager] attributesOfItemAtPath:[NSString stringWithFormat:@"%@/%@", documentsPath, obj2] error:nil];
+        NSDictionary *secondFile = [[NSFileManager defaultManager] attributesOfItemAtPath:[NSString stringWithFormat:@"%@/%@", [documentsURL path], obj2] error:nil];
         NSDate *secondFileDate            = [secondFile objectForKey:NSFileModificationDate];
         return [secondFileDate compare:firstFileDate];
     }];
     for (int i=0;i<[sortedFileList count];i++){
-        NSString *fileName = [sortedFileList objectAtIndex:i];
-        fileName = [documentsPath stringByAppendingPathComponent:fileName];
-        [files addObject:fileName];
+        NSURL *fileURL = [sortedFileList objectAtIndex:i];
+        NSString *filePath = [fileURL path];
+        [files addObject:filePath];
         //max 10 files displayed
         if ([files count] == 10){
             break;
         }
     }
     return files;
+}
+
+// Returns the URL to the application's Documents directory.
+- (NSURL *)applicationDocumentsDirectory
+{
+    NSURL *documentsURL = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
+    NSURL *inboxURL = [documentsURL URLByAppendingPathComponent:@"Inbox"];
+    return inboxURL;
 }
 
 @end

@@ -8,6 +8,7 @@
 
 #import "DPRAppDelegate.h"
 #import "Flurry.h"
+#import "DPRDataModel.h"
 
 @implementation DPRAppDelegate
 
@@ -26,6 +27,11 @@
         [[NSUserDefaults standardUserDefaults] synchronize];
     }
     
+    return YES;
+}
+
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url{
+    [[DPRDataModel sharedInstance] saveFile:url];
     return YES;
 }
 							

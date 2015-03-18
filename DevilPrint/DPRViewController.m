@@ -109,6 +109,7 @@
     
     locationManager.distanceFilter = 100;
     
+    [locationManager requestWhenInUseAuthorization];
     [locationManager startUpdatingLocation];
 }
 

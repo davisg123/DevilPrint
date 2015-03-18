@@ -35,5 +35,7 @@
 //get a list of files from the app directory
 -(NSArray *)fileList;
 
+-(void)saveFile:(NSURL*)fileURL;
+
 
 @end
